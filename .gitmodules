@@ -1,0 +1,6 @@
+[submodule "hebcal-leyning"]
+	path = hebcal-leyning
+	url = https://github.com/hebcal/hebcal-leyning.git
+[submodule "hebcal-es6"]
+	path = hebcal-es6
+	url = https://github.com/hebcal/hebcal-es6.git
