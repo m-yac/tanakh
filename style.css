@@ -10,10 +10,10 @@
   font-family: bitter;
   src: url(Bitter-Regular.ttf);
 }
-
 @font-face {
-  font-family: bitter-italic;
+  font-family: bitter;
   src: url(Bitter-Italic.ttf);
+  font-style: italic;
 }
 
 @font-face {
@@ -23,7 +23,7 @@
 
 html {
   background-color: #EEE;
-  font-family: cmu, sans-serif;
+  font-family: bitter, serif;
 }
 
 body, table, tr, td, input, button, select, option, code {
@@ -40,7 +40,7 @@ body {
    color: #222;
    margin: 0 auto;
    margin-bottom: 0;
-   max-width: 750px;
+   max-width: 850px;
    padding-top: 1px;
    padding-bottom: 25px;
    padding-left: min(5%,35px);
@@ -135,9 +135,40 @@ hr {
 }
 
 .flexBox {
-  flex-basis:min(350px,100%);
+  flex-basis:max(26%);
   flex-shrink: 0;
   margin-bottom: 10px;
+}
+
+.chapterContainer {
+  display:flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-top: -1px;
+  margin-left: -1px;
+  margin-bottom: 10px;
+}
+
+.subBookContainer {
+  display:flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-top: -1px;
+  margin-right: 3px;
+  font-size: 66%;
+}
+
+.chapterBox {
+  height: 12px;
+  outline: 1px solid;
+  margin-top: 1px;
+  margin-left: 1px;
+}
+
+.versesBox {
+  height: 12px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .centerFlexContainer {
