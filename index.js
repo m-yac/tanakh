@@ -186,7 +186,7 @@ const haftarotByBook =
   })();
 
 const ketuvim = [
-  ["Psalms", [["Psalms", [6, 12, 9, 9, 13, 11, 18, 10, 21, 18, 7, 9, 6, 7, 5, 11, 15, 51, 15, 10, 14, 32, 6, 10, 22, 11, 14, 9, 11, 13, 25, 11, 22, 23, 28, 13, 40, 23, 14, 18, 14, 12, 5, 27, 18, 12, 10, 15, 21, 23, , 21, 11, 7, 9, 24, 14, 12, 12, 18, 14, 9, 13, 12, 11, 14, 20, 8, 36, 37, 6, 24, 20, 28, 23, 11, 13, 21, 72, 13, 20, 17, 8, 19, 13, 14, 17, 7, 19, 53, 17, 16, 16, 5, 23, 11, 13, 12, 9, 9, 5, , 8, 29, 22, 35, 45, 48, 43, 14, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 14, 10, 8, 12, 15, 21, 10, 20, 14, 9, 6]]]],
+  ["Psalms", [["Psalms", [6, 12, 9, 9, 13, 11, 18, 10, 21, 18, 7, 9, 6, 7, 5, 11, 15, 51, 15, 10, 14, 32, 6, 10, 22, 11, 14, 9, 11, 13, 25, 11, 22, 23, 28, 13, 40, 23, 14, 18, 14, 12, 5, 27, 18, 12, 10, 15, 21, 23, 21, 11, 7, 9, 24, 14, 12, 12, 18, 14, 9, 13, 12, 11, 14, 20, 8, 36, 37, 6, 24, 20, 28, 23, 11, 13, 21, 72, 13, 20, 17, 8, 19, 13, 14, 17, 7, 19, 53, 17, 16, 16, 5, 23, 11, 13, 12, 9, 9, 5, 8, 29, 22, 35, 45, 48, 43, 14, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 14, 10, 8, 12, 15, 21, 10, 20, 14, 9, 6]]]],
   ["Proverbs", [["Proverbs", [33, 22, 35, 27, 23, 35, 27, 36, 18, 32, 31, 28, 25, 35, 33, 33, 28, 24, 29, 30, 31, 29, 35, 34, 28, 28, 27, 28, 27, 33, 31]]]],
   ["Job", [["Job", [22, 13, 26, 21, 27, 30, 21, 22, 35, 22, 20, 25, 28, 22, 35, 22, 16, 21, 29, 29, 34, 30, 17, 25, 6, 14, 21, 28, 25, 31, 40, 22, 33, 37, 16, 33, 24, 41, 30, 32, 26, 17]]]],
   ["Song of Songs", [["Song of Songs", [17, 17, 11, 16, 16, 12, 14, 14]]]],
@@ -346,11 +346,26 @@ $(document).ready(function() {
   for (let b = 0; b < torah.length; b++) {
     $('#torahBox').append($('<h4>').text(torah[b][2]));
     const chs = $('<div>').addClass("chapterContainer");
+    const marker = $('<div>').addClass("marker hidden");
+    chs.append(marker);
+    chs.mouseleave(function (e) {
+      marker.addClass("hidden");
+      $('#mouseoverBox').addClass("hidden");
+    });
     let p = 0;
     for (let c = 0; c < torah[b][4].length; c++) {
       const vs = torah[b][4][c];
       const cb = $('<div>').addClass("chapterBox");
-      cb.css("width", vs + "px")
+      cb.css("width", vs + "px");
+      cb.mousemove(function (e) {
+        const l = e.target.getBoundingClientRect().left + window.scrollX;
+        const t = e.target.getBoundingClientRect().top  + window.scrollY;
+        const h = e.target.getBoundingClientRect().height;
+        const v = Math.ceil(e.clientX - l);
+        marker.removeClass("hidden").css("left", e.clientX).css("top", t - 1);
+        $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
+        $('#verseText').text(torah[b][2] + " " + (c+1) + ":" + v);
+      });
       const [_,[pc2,pv2]] = portions[b][p][3];
       if (c+1 < pc2) {
         const sbv = $('<div>').addClass("versesBox");
@@ -382,6 +397,12 @@ $(document).ready(function() {
     $('#neviimBox').append($('<h4>').text(neviim[b][0]));
     for (let sb = 0; sb < neviim[b][1].length; sb++) {
       const chs = $('<div>').addClass("chapterContainer");
+      const marker = $('<div>').addClass("marker hidden");
+      chs.append(marker);
+      chs.mouseleave(function (e) {
+        marker.addClass("hidden");
+        $('#mouseoverBox').addClass("hidden");
+      });
       if (neviim[b][1].length > 1) {
         if (isNaN(neviim[b][1][sb][0][0])) {
           chs.append($('<div>').addClass("subBookContainer")
@@ -396,7 +417,16 @@ $(document).ready(function() {
       for (let c = 0; c < neviim[b][1][sb][1].length; c++) {
         const vs = neviim[b][1][sb][1][c];
         const cb = $('<div>').addClass("chapterBox");
-        cb.css("width", vs + "px")
+        cb.css("width", vs + "px");
+        cb.mousemove(function (e) {
+          const l = e.target.getBoundingClientRect().left + window.scrollX;
+          const t = e.target.getBoundingClientRect().top  + window.scrollY;
+          const h = e.target.getBoundingClientRect().height;
+          const v = Math.ceil(e.clientX - l);
+          marker.removeClass("hidden").css("left", e.clientX).css("top", t - 1);
+          $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
+          $('#verseText').text(neviim[b][1][sb][0] + " " + (c+1) + ":" + v);
+        })
         if (p < haftarotByBook[b][sb].length) {
           const [[tb,tp],[[pc1,pv1],[pc2,pv2]]] = haftarotByBook[b][sb][p];
           if (c+1 >= pc1) {
@@ -452,6 +482,12 @@ $(document).ready(function() {
     $('#ketuvimBox').append($('<h4>').text(ketuvim[b][0]));
     for (let sb = 0; sb < ketuvim[b][1].length; sb++) {
       const chs = $('<div>').addClass("chapterContainer");
+      const marker = $('<div>').addClass("marker hidden");
+      chs.append(marker);
+      chs.mouseleave(function (e) {
+        marker.addClass("hidden");
+        $('#mouseoverBox').addClass("hidden");
+      });
       if (ketuvim[b][1].length > 1) {
         if (isNaN(ketuvim[b][1][sb][0][0])) {
           chs.append($('<div>').addClass("subBookContainer")
@@ -464,7 +500,16 @@ $(document).ready(function() {
       }
       for (let c = 0; c < ketuvim[b][1][sb][1].length; c++) {
         const cb = $('<div>').addClass("chapterBox");
-        cb.css("width", Math.ceil(ketuvim[b][1][sb][1][c]) + "px")
+        cb.css("width", Math.ceil(ketuvim[b][1][sb][1][c]) + "px");
+        cb.mousemove(function (e) {
+          const l = e.target.getBoundingClientRect().left + window.scrollX;
+          const t = e.target.getBoundingClientRect().top  + window.scrollY;
+          const h = e.target.getBoundingClientRect().height;
+          const v = Math.ceil(e.clientX - l);
+          marker.removeClass("hidden").css("left", e.clientX).css("top", t - 1);
+          $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
+          $('#verseText').text(ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v);
+        })
         chs.append(cb);
       }
       $('#ketuvimBox').append(chs);

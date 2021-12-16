@@ -147,6 +147,7 @@ hr {
   margin-top: -1px;
   margin-left: -1px;
   margin-bottom: 10px;
+  cursor: none;
 }
 
 .subBookContainer {
@@ -169,6 +170,17 @@ hr {
   height: 12px;
   display: inline-block;
   vertical-align: top;
+}
+
+.mouseoverBox {
+  position: absolute;
+  background-color: #FFF;
+  border: 1px solid #000088;
+  border-radius: 5px;
+  font-size: 67%;
+  text-align: left;
+  vertical-align: text-top;
+  padding: 10px;
 }
 
 .centerFlexContainer {
@@ -282,15 +294,15 @@ td {
   margin: 0;
 }
 
-.primeMarker {
-  background-color: #444;
-  height: 70px;
-  width: 1.5px;
+.marker {
+  background-color: #0010F5;
+  height: 12px;
+  width: 1px;
   position: absolute;
   margin: 0;
   top: 0;
   border: 1px solid;
-  border-color: #FFF;
+  border-color: #C4D4FF;
 }
 
 .unselectable {
