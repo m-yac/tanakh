@@ -147,6 +147,9 @@ hr {
   margin-top: -1px;
   margin-left: -1px;
   margin-bottom: 10px;
+}
+
+.noCursor {
   cursor: none;
 }
 
@@ -160,6 +163,7 @@ hr {
 }
 
 .chapterBox {
+  position: relative;
   height: 12px;
   outline: 1px solid;
   margin-top: 1px;
@@ -177,10 +181,21 @@ hr {
   background-color: #FFF;
   border: 1px solid #000088;
   border-radius: 5px;
-  font-size: 67%;
+  font-size: 75%;
   text-align: left;
   vertical-align: text-top;
   padding: 10px;
+  max-width: 300px;
+}
+.mouseoverBox p, .mouseoverBox ul, .mouseoverBox li {
+  margin: 0;
+}
+.mouseoverBox li {
+  margin-top: 5px;
+}
+
+.highlighted[style] {
+  background-color: rgb(100, 143, 255) !important;
 }
 
 .centerFlexContainer {
