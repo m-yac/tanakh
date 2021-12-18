@@ -74,7 +74,7 @@ const portions = [
     ["Nitzavim", "נִצָּבִים", "Standing", [[29,9],[30,20]], "This portion is combined with the next except on years where there are two <i>Shabbat</i>s between <i>Rosh Hashanah</i> and <i>Sukkot</i>."],
     ["Vayelech", "וַיֵּלֶךְ", "And He Went", [[31,1],[31,30]]],
     ["Haazinu", "הַאֲזִינוּ", "Listen", [[32,1],[32,52]]],
-    ["V'Zot HaBerachah", "וְזֹאת הַבְּרָכָה", "And This Is the Blessing", [[33,1],[34,12]], "This portion is skipped since it is always read on <i>Simchat Torah</i>."]
+    ["V'Zot HaBerachah", "וְזֹאת הַבְּרָכָה", "And This Is the Blessing", [[33,1],[34,12]], "This portion is skipped since its contents are always read on <i>Simchat Torah</i>."]
   ]
 ];
 
@@ -651,7 +651,10 @@ $(document).ready(function() {
           marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
           $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
           const readOn = torahByCh[b][c].filter(x => x[2][0] <= v && v <= x[2][1]);
-          $('#verseText').html("<b>" + torah[b][2] + " " + (c+1) + ":" + v + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
+          const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + torah[b][2] + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
+                              .text(torah[b][2] + " " + (c+1) + ":" + v)
+                              .attr("target", "blank");
+          $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
           $('#readingsText').empty();
           let asts = undefined;
           readOn.forEach(function (x) {
@@ -758,7 +761,10 @@ $(document).ready(function() {
             marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
             $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
             const readOn = neviimByCh[b][sb][c].filter(x => x[2][0] <= v && v <= x[2][1]);
-            $('#verseText').html("<b>" + neviim[b][1][sb][0] + " " + (c+1) + ":" + v + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
+            const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + neviim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
+                                .text(neviim[b][1][sb][0] + " " + (c+1) + ":" + v)
+                                .attr("target", "blank");
+            $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
             $('#readingsText').empty();
             let asts = undefined;
             readOn.forEach(function (x) {
@@ -859,7 +865,10 @@ $(document).ready(function() {
             marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
             $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
             const readOn = ketuvimByCh[b][sb][c].filter(x => x[2][0] <= v && v <= x[2][1]);
-            $('#verseText').html("<b>" + ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
+            const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + ketuvim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
+                                .text(ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v)
+                                .attr("target", "blank");
+            $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
             $('#readingsText').empty();
             let asts = undefined;
             readOn.forEach(function (x) {
