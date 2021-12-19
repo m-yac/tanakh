@@ -664,6 +664,7 @@ $(document).ready(function() {
   for (let c = 0; c < ketuvim[0][1][0][1].length; c++) {
     ketuvimByCh[0][0][c].push(["P", "WIP", [1,ketuvim[0][1][0][1][c]]]);
   }
+  ketuvimByCh[1][0][2].push(["S", "...", [18,18]]);
 
   let chIx = 0;
   for (let b = 0; b < torah.length; b++) {
@@ -927,6 +928,16 @@ $(document).ready(function() {
             const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + ketuvim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                                 .text(ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v)
                                 .attr("target", "blank");
+            if (ketuvim[b][1][sb][0] == "Psalms") {
+              $('#verseText').html("<b>" + lnk.prop("outerHTML") + "</b>, data coming soon!");
+              $('#readingsText').empty();
+              return;
+            }
+            if (ketuvim[b][1][sb][0] == "Proverbs" && 1+c == 3 && v == 18) {
+              $('#verseText').html("<b>" + lnk.prop("outerHTML") + "</b>, read on <i>Shabbat</i>");
+              $('#readingsText').empty();
+              return;
+            }
             $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
             $('#readingsText').empty();
             let asts = undefined;
@@ -947,7 +958,9 @@ $(document).ready(function() {
           });
           const [top, height] = isBelow ? [6,6] : [0,12];
           const clr = kind == "A" ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53)
-                                  : kind == "P" ? "#AAA" : "rgb(" + ibm_clrs[4].join(", ") + ")";
+                                  : kind == "P" ? "#AAA"
+                                  : kind == "S" ? "rgb(100, 143, 255)"
+                                  : "rgb(" + ibm_clrs[4].join(", ") + ")";
           const bx = $('<div>').addClass("versesBox");
           bx.css("position", "absolute");
           bx.css("left", v1-1).css("width", v2 - v1 + 1).css("top", top).css("height", height);
