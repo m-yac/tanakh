@@ -401,8 +401,8 @@ const holidayKeyMap = {
   "Sukkot Shabbat Chol ha-Moed": "<i>Shabbat</i> of <i>Sukkot</i>",
   "Sukkot Final Day (Hoshana Raba)": "<i>Hoshana Raba</i> (seventh day of <i>Sukkot</i>)",
   "Shmini Atzeret": "<i>Hoshana Raba</i> (eighth day of <i>Sukkot</i>)",
-  "Erev Simchat Torah": "Evening before <i>Simchat Torah</i> (Celebration of the Torah)",
-  "Simchat Torah": "<i>Simchat Torah</i> (Celebration of the Torah)",
+  "Erev Simchat Torah": "Evening before <i>Simchat Torah</i> (Celebration of the <i>Torah</i>)",
+  "Simchat Torah": "<i>Simchat Torah</i> (Celebration of the <i>Torah</i>)",
   "Shabbat Chanukah": "First <i>Shabbat</i> of <i>Chanukah</i>",
   "Shabbat Chanukah II": "Second <i>Shabbat</i> of <i>Chanukah</i>",
   "Shabbat Rosh Chodesh Chanukah": "<i>Chanukah</i> on <i>Shabbat</i> and <i>Rosh Chodesh</i>",
@@ -487,7 +487,7 @@ function saniID(s) {
 // JQuery
 // ================================================================
 
-var clickState = "";
+var [clickState, justSetClickState] = ["", false];
 var lastTorahPortion = "";
 var portionDates = {};
 
@@ -635,7 +635,7 @@ $(document).ready(function() {
     });
     chs.click(function (e) {
       if (clickState === "") {
-        clickState = "torah";
+        [clickState, justSetClickState] = ["torah", true];
       }
     });
     for (let c = 0; c < torah[b][4].length; c++) {
@@ -734,7 +734,7 @@ $(document).ready(function() {
       });
       chs.click(function (e) {
         if (clickState === "") {
-          clickState = "neviim";
+          [clickState, justSetClickState] = ["neviim", true];
         }
       });
       if (neviim[b][1].length > 1) {
@@ -839,7 +839,7 @@ $(document).ready(function() {
       });
       chs.click(function (e) {
         if (clickState === "") {
-          clickState = "ketuvim";
+          [clickState, justSetClickState] = ["ketuvim", true];
         }
       });
       if (ketuvim[b][1].length > 1) {
@@ -903,12 +903,38 @@ $(document).ready(function() {
   }
 
   $(this).keydown(function (e) {
-    if (e.key == "Escape") {
+    if (clickState !== "" && e.key == "Escape") {
       clickState = "";
       for (let i = 0; i < chIx; i++) {
+        $('#ch' + i).addClass("noCursor");
         $('#marker' + i).addClass("hidden");
       }
       $('#mouseoverBox').addClass("hidden");
+      if (lastTorahPortion !== "") {
+        for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+        }
+      }
+      lastTorahPortion = "";
+    }
+  });
+  $(this).click(function (e) {
+    if (justSetClickState) {
+      justSetClickState = false;
+    }
+    else if (clickState !== "" && $('#mouseoverBox:hover').length == 0) {
+      clickState = "";
+      for (let i = 0; i < chIx; i++) {
+        $('#ch' + i).addClass("noCursor");
+        $('#marker' + i).addClass("hidden");
+      }
+      $('#mouseoverBox').addClass("hidden");
+      if (lastTorahPortion !== "") {
+        for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+        }
+      }
+      lastTorahPortion = "";
     }
   });
 
