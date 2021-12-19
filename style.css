@@ -205,9 +205,10 @@ hr {
 }
 
 .smallFlexBox {
-  flex-basis: 20%;
+  flex-basis: max(347px);
   flex-shrink: 0;
   margin-bottom: 10px;
+  font-size: 80%;
 }
 
 .paramsTable {

@@ -401,8 +401,8 @@ const holidayKeyMap = {
   "Sukkot Shabbat Chol ha-Moed": "<i>Shabbat</i> of <i>Sukkot</i>",
   "Sukkot Final Day (Hoshana Raba)": "<i>Hoshana Raba</i> (seventh day of <i>Sukkot</i>)",
   "Shmini Atzeret": "<i>Hoshana Raba</i> (eighth day of <i>Sukkot</i>)",
-  "Erev Simchat Torah": "Evening before <i>Simchat Torah</i> (Celebration of the Torah)",
-  "Simchat Torah": "<i>Simchat Torah</i> (Celebration of the Torah)",
+  "Erev Simchat Torah": "Evening before <i>Simchat Torah</i> (Celebration of the <i>Torah</i>)",
+  "Simchat Torah": "<i>Simchat Torah</i> (Celebration of the <i>Torah</i>)",
   "Shabbat Chanukah": "First <i>Shabbat</i> of <i>Chanukah</i>",
   "Shabbat Chanukah II": "Second <i>Shabbat</i> of <i>Chanukah</i>",
   "Shabbat Rosh Chodesh Chanukah": "<i>Chanukah</i> on <i>Shabbat</i> and <i>Rosh Chodesh</i>",
@@ -430,7 +430,7 @@ const holidayKeyMap = {
 
 const portions_flat = [].concat.apply([], portions);
 var descOfPortion_cache = {};
-function descOfPortion(nm, k) {
+function descOfPortion(nm, k, hideAst) {
   if (descOfPortion_cache[[nm,k]] != undefined) {
     return descOfPortion_cache[[nm,k]];
   }
@@ -438,7 +438,7 @@ function descOfPortion(nm, k) {
     const {summary, haftara} = hebcal__leyning.getLeyningForParsha(k);
     const {num} = hebcal__leyning__aliyot[k];
     let str = "<b><i>Shabbat</i> week " + num;
-    if (portions_flat[num-1][4]) { str += "*"; }
+    if (!hideAst && portions_flat[num-1][4]) { str += "*"; }
     if (portionDates[k]) { str += " (" + portionDates[k] + ")"; }
     str += ": <i>Parashat " + k + "</i> ";
     str += "(" + portions_flat[num-1][2] + ")</b>";
@@ -452,8 +452,9 @@ function descOfPortion(nm, k) {
   if (nm == "H") {
     const {summary, haftara} = hebcal__leyning.getLeyningForHolidayKey(k);
     const k_fmt = holidayKeyMap[k];
-    let str = "<b>" + (k_fmt ? k_fmt : k) + "</b>";
-    str += "<ul>"
+    let str = "<b>" + (k_fmt ? k_fmt : k);
+    if (portionDates[k]) { str += " (" + portionDates[k] + ")"; }
+    str += "</b><ul>"
     if (summary && haftara) {
       str += "<li>" + summary + "</li>";
       str += "<li><i>Haftarah</i>: " + haftara + "</li>";
@@ -487,7 +488,7 @@ function saniID(s) {
 // JQuery
 // ================================================================
 
-var clickState = "";
+var [clickState, justSetClickState] = ["", false];
 var lastTorahPortion = "";
 var portionDates = {};
 
@@ -502,6 +503,23 @@ $(document).ready(function() {
       if (e.parsha) {
         e.parsha.forEach(p => portionDates[p] = d.toLocaleDateString());
       }
+      const k = hebcal__leyning.getLeyningKeyForEvent(e);
+      if (k) {
+        portionDates[k] = d.toLocaleDateString();
+        if (k == "Yom Kippur") {
+          portionDates["Yom Kippur (Mincha, Traditional)"] = d.toLocaleDateString();
+        }
+        if (k.includes("(on Shabbat)")) {
+          const k1 = k.replace(" (on Shabbat)", "");
+          portionDates[k1] = d.toLocaleDateString();
+          if (k1.includes("Pesach") && portionDates["Pesach Shabbat Chol ha-Moed"] == undefined) {
+            portionDates["Pesach Shabbat Chol ha-Moed"] = d.toLocaleDateString();
+          }
+        }
+        if (k == "Sukkot Shabbat Chol ha-Moed" && portionDates[k] == undefined) {
+          portionDates["Sukkot Chol ha-Moed Day " + e.cholHaMoedDay] = d.toLocaleDateString();
+        }
+      }
     }
   }
   hebcal_opts.year = today.getFullYear() + 1;
@@ -514,7 +532,48 @@ $(document).ready(function() {
         }
       });
     }
+    const k = hebcal__leyning.getLeyningKeyForEvent(e);
+    if (k && portionDates[k] == undefined) {
+      portionDates[k] = d.toLocaleDateString();
+      if (k == "Yom Kippur") {
+        portionDates["Yom Kippur (Mincha, Traditional)"] = d.toLocaleDateString();
+      }
+      if (k.includes(" (on Shabbat)")) {
+        const k1 = k.replace(" (on Shabbat)", "");
+        if (portionDates[k1] == undefined) {
+          portionDates[k1] = d.toLocaleDateString();
+        }
+        if (k1.includes("Pesach") && portionDates["Pesach Shabbat Chol ha-Moed"] == undefined) {
+          portionDates["Pesach Shabbat Chol ha-Moed"] = d.toLocaleDateString();
+        }
+      }
+      if (k == "Sukkot Shabbat Chol ha-Moed" && portionDates[k] == undefined) {
+        portionDates["Sukkot Chol ha-Moed Day " + e.cholHaMoedDay] = d.toLocaleDateString();
+      }
+    }
   }
+  hebcal_opts.year = today.getFullYear()
+  hebcal_opts.start = new Date(today.getTime() + (0) * 60 * 60 * 24 * 1000);
+  hebcal_opts.end = new Date(today.getTime() + (365) * 60 * 60 * 24 * 1000);
+  hebcal_opts.noRoshChodesh = 1;
+  hebcal_opts.noSpecialShabbat = 1;
+  hebcal_opts.noMinorFast = 1;
+  let [nextParshas, nextHoliday] = [undefined, undefined];
+  for (const e of hebcal.HebrewCalendar.calendar(hebcal_opts)) {
+    if (e.parsha && !nextParshas) { nextParshas = e.parsha; }
+    const k = hebcal__leyning.getLeyningKeyForEvent(e);
+    if (k && !nextHoliday) { nextHoliday = k; }
+    if (!nextParshas && !nextHoliday) { break; }
+  }
+  // $('#nextShabbatPortionPlural').text(nextParshas.length == 1 ? "portion" : "portions");
+  $('#nextShabbatPortion').html("<li>" + nextParshas.map(p => descOfPortion("A", p, nextParshas.length == 1)[0]).join("</li><li>") + "</li>");
+  if (nextParshas.length > 1) {
+    const asts = nextParshas.map(p => descOfPortion("A", p)[1]).filter(x => x);
+    $('#astTextNextShabbatPortion').html(asts.length > 0 ? "* " + asts[0] : "");
+    $('#astTextNextShabbatPortion').css("margin-top", asts.length > 0 ? "5px" : "0");
+  }
+  $('#nextHolidayPortion').html("<li>" + descOfPortion("H", nextHoliday)[0] + "</li>");
+
 
   let [torahIx, torahByCh] = [{}, []];
   for (let b = 0; b < torah.length; b++) {
@@ -635,7 +694,7 @@ $(document).ready(function() {
     });
     chs.click(function (e) {
       if (clickState === "") {
-        clickState = "torah";
+        [clickState, justSetClickState] = ["torah", true];
       }
     });
     for (let c = 0; c < torah[b][4].length; c++) {
@@ -734,7 +793,7 @@ $(document).ready(function() {
       });
       chs.click(function (e) {
         if (clickState === "") {
-          clickState = "neviim";
+          [clickState, justSetClickState] = ["neviim", true];
         }
       });
       if (neviim[b][1].length > 1) {
@@ -839,7 +898,7 @@ $(document).ready(function() {
       });
       chs.click(function (e) {
         if (clickState === "") {
-          clickState = "ketuvim";
+          [clickState, justSetClickState] = ["ketuvim", true];
         }
       });
       if (ketuvim[b][1].length > 1) {
@@ -903,12 +962,38 @@ $(document).ready(function() {
   }
 
   $(this).keydown(function (e) {
-    if (e.key == "Escape") {
+    if (clickState !== "" && e.key == "Escape") {
       clickState = "";
       for (let i = 0; i < chIx; i++) {
+        $('#ch' + i).addClass("noCursor");
         $('#marker' + i).addClass("hidden");
       }
       $('#mouseoverBox').addClass("hidden");
+      if (lastTorahPortion !== "") {
+        for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+        }
+      }
+      lastTorahPortion = "";
+    }
+  });
+  $(this).click(function (e) {
+    if (justSetClickState) {
+      justSetClickState = false;
+    }
+    else if (clickState !== "" && $('#mouseoverBox:hover').length == 0) {
+      clickState = "";
+      for (let i = 0; i < chIx; i++) {
+        $('#ch' + i).addClass("noCursor");
+        $('#marker' + i).addClass("hidden");
+      }
+      $('#mouseoverBox').addClass("hidden");
+      if (lastTorahPortion !== "") {
+        for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+        }
+      }
+      lastTorahPortion = "";
     }
   });
 
