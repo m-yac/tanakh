@@ -494,6 +494,13 @@ button:active {
   width: 90px;
 }
 
+.dateSelect select {
+  width: 100px;
+}
+.dateSelect {
+  width: 100px;
+}
+
 .explainerText {
   text-align: center;
   display: block;
