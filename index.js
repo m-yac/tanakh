@@ -565,12 +565,12 @@ function parseVerses(s) {
   return s.split('-').map(parseVerse);
 }
 
-function addPortionToCh(arr, vs_arr, vs, s1, s2) {
+function addPortionToCh(arr, vs_arr, vs, s1, s2, s3) {
   const [[c1,v1],[c2,v2]] = vs;
   for (let c = c1; c <= c2; c++) {
     const tot_vs = vs_arr[c-1];
     const vs = [c == c1 ? v1 : 1, c == c2 ? v2 : tot_vs];
-    arr[c-1].push([s1, s2, vs]);
+    arr[c-1].push([s1, s2, s3, vs]);
   }
 }
 
@@ -654,87 +654,123 @@ const shabbatKeyMap = {
 
 const portions_flat = [].concat.apply([], portions);
 var descOfPortion_cache = {};
-function descOfPortion(nm, k, hideAst) {
+function descOfPortion(nm, k, rd, hideAst) {
   if (descOfPortion_cache[[nm,k]] != undefined) {
-    return descOfPortion_cache[[nm,k]];
+    return [descOfPortion_cache[[nm,k]][0](rd), descOfPortion_cache[[nm,k]][1]];
   }
+  const h = ' class="highlighted"';
   if (nm == "A") {
     const {summary, haftara} = hebcal__leyning.getLeyningForParsha(k);
     const {num} = hebcal__leyning__aliyot[k];
-    let str = "<b><i>Shabbat</i> week " + num;
-    if (!hideAst && portions_flat[num-1][4]) { str += "*"; }
-    if (portionDates[k]) { str += " (" + portionDates[k] + ")"; }
-    str += ": <i>Parashat " + k + "</i> ";
-    str += "(" + portions_flat[num-1][2] + ")</b>";
-    str += "<ul>";
-    str += "<li>" + summary + "</li>";
-    str += "<li><i>Haftarah</i>: " + haftara + "</li>";
-    str += "</ul>";
-    descOfPortion_cache[[nm,k]] = [str, portions_flat[num-1][4]];
-    return [str];
+    let str1 = "<b><i>Shabbat</i> week " + num;
+    if (!hideAst && portions_flat[num-1][4]) { str1 += "*"; }
+    if (portionDates[k]) { str1 += " (" + portionDates[k] + ")"; }
+    str1 += ": <i>Parashat " + k + "</i> ";
+    str1 += "(" + portions_flat[num-1][2] + ")</b>";
+    str1 += "<ul>";
+    str1 += "<li><span";
+    let str2 = ">" + summary + "</span></li>";
+    str2 += "<li><span";
+    let str3 = "><i>Haftarah</i>: " + haftara + "</span></li>";
+    str3 += "</ul>";
+    const fn = function (rdi) {
+      // for now, we ignore highligting here
+      rdi = "";
+      return str1 + (rdi == "torah" ? h : "") +
+             str2 + (rdi == "haft" ? h : "") +
+             str3;
+    };
+    descOfPortion_cache[[nm,k]] = [fn, portions_flat[num-1][4]];
+    return [fn(rd)];
   }
   if (nm == "H") {
     const {summary, haftara} = hebcal__leyning.getLeyningForHolidayKey(k);
     const k_fmt = holidayKeyMap[k];
-    let str = "<b>" + (k_fmt ? k_fmt : k);
-    if (portionDates[k]) { str += " (" + portionDates[k] + ")"; }
-    str += "</b><ul>"
+    let str1 = "<b>" + (k_fmt ? k_fmt : k);
+    if (portionDates[k]) { str1 += " (" + portionDates[k] + ")"; }
+    str1 += "</b><ul>"
+    let [str2, str3] = ["", ""];
     if (summary && haftara) {
-      str += "<li>" + summary + "</li>";
-      str += "<li><i>Haftarah</i>: " + haftara + "</li>";
+      str1 += "<li><span";
+      str2 = ">" + summary + "</span></li>";
+      str2 += "<li><span";
+      str3 = "><i>Haftarah</i>: " + haftara + "</span></li>";
     }
     else if (summary) {
-      str += "<li>" + summary + "</li>";
+      str1 += "<li><span";
+      str3 = ">" + summary + "</span></li>";
     }
     else if (haftara) {
-      str += "<li>Additional <i>Haftarah</i>: " + haftara + "</li>";
+      str1 += "<li><span";
+      str3 = ">Additional <i>Haftarah</i>: " + haftara + "</span></li>";
     }
+    let str4 = "";
     const i = megillot.findIndex(e => e[1] === k);
     if (i >= 0) {
       const [b,sb] = megillot[i][0];
-      str += "<li><i>Megillah</i>: " + ketuvim[b][1][sb][0] + "</li>";
+      str3 += "<li><span";
+      str4 = "><i>Megillah</i>: " + ketuvim[b][1][sb][0] + "</span></li>";
     }
+    let str5 = "";
     if (k in hallelHolidays) {
-      str += "<li><i>Hallel</i>: "
+      str4 += "<li><span";
+      str5 = "><i>Hallel</i>: "
       if (hallelHolidays[k]) {
-        str += fmtNameAndMultiVerses(["Psalms", fullHallel]);
+        str5 += fmtNameAndMultiVerses(["Psalms", fullHallel]);
       }
       else {
-        str += fmtNameAndMultiVerses(["Psalms", partialHallel]);
+        str5 += fmtNameAndMultiVerses(["Psalms", partialHallel]);
       }
-      str += "</li>";
+      str5 += "</span></li>";
     }
+    let str6 = "";
     if (k in yizkorHolidays) {
-      str += "<li><i>Yizkor</i>: ";
-      str += fmtNameAndMultiVerses(["Psalms", yizkor]);
-      str += "</li>";
+      str4 += "<li><span";
+      str6 = "><i>Yizkor</i>: ";
+      str6 += fmtNameAndMultiVerses(["Psalms", yizkor]);
+      str6 += "</span></li>";
     }
-    str += "</ul>";
-    descOfPortion_cache[[nm,k]] = [str, undefined];
-    return [str, undefined];
+    str6 += "</ul>";
+    const fn = function (rdi) {
+      // for now, we ignore highligting here
+      rdi = "";
+      return str1 + (rdi == "torah" ? h : "") +
+             str2 + (rdi == "haft" ? h : "") +
+             str3 + (rdi == "megillah" ? h : "") +
+             str4 + (rdi == "hallel" ? h : "") +
+             str5 + (rdi == "yizkor" ? h : "") +
+             str6;
+    };
+    descOfPortion_cache[[nm,k]] = [fn, undefined];
+    return [fn(rd), undefined];
   }
   if (nm == "S") {
     const k_fmt = shabbatKeyMap[k];
     let str = "<b>" + (k_fmt ? k_fmt : k) + " services</b><ul>";
     for (const k1 of shabbats[k]) {
       const k1_fmt = shabbatKeyMap[k1];
-      str += "<li>" + (k1_fmt ? k1_fmt : "<i>" + k1 + "</i>") + ": ";
+      str += "<li><span";
+      if (k1 == rd) { str += h; }
+      str += ">" + (k1_fmt ? k1_fmt : "<i>" + k1 + "</i>") + ": ";
       str += shabbatReadings[k1].map(fmtNameAndMultiVerses).join("; ");
-      str += "</li>"
+      str += "</span></li>"
     }
     str += "</ul>"
-    descOfPortion_cache[[nm,k]] = [str, undefined];
+    // descOfPortion_cache[[nm,k]] = [str, undefined];
     return [str, undefined];
   }
   if (nm == "Y") {
     let str = "<b>" + k + " <i>Shir Shel Yom</i> (Song of the Day)</b><ul>";
-    str += "<li>" + fmtNameAndMultiVerses(["Psalms", shirShelYom[k]]);
+    str += "<li><span";
+    // for now, we ignore highligting here
+    // str += h;
+    str += ">" + fmtNameAndMultiVerses(["Psalms", shirShelYom[k]]);
     str += "</li></ul>"
-    descOfPortion_cache[[nm,k]] = [str, undefined];
+    descOfPortion_cache[[nm,k]] = [(() => str), undefined];
     return [str, undefined];
   }
   let str = "<b>" + k + "</b>";
-  descOfPortion_cache[[nm,k]] = [str, undefined];
+  descOfPortion_cache[[nm,k]] = [(() => str), undefined];
   return [str, undefined];
 }
 
@@ -825,13 +861,13 @@ $(document).ready(function() {
     if (!nextParshas && !nextHoliday) { break; }
   }
   // $('#nextShabbatPortionPlural').text(nextParshas.length == 1 ? "portion" : "portions");
-  $('#nextShabbatPortion').html("<li>" + nextParshas.map(p => descOfPortion("A", p, nextParshas.length == 1)[0]).join("</li><li>") + "</li>");
+  $('#nextShabbatPortion').html("<li>" + nextParshas.map(p => descOfPortion("A", p, "", nextParshas.length == 1)[0]).join("</li><li>") + "</li>");
   if (nextParshas.length > 1) {
-    const asts = nextParshas.map(p => descOfPortion("A", p)[1]).filter(x => x);
+    const asts = nextParshas.map(p => descOfPortion("A", p, "")[1]).filter(x => x);
     $('#astTextNextShabbatPortion').html(asts.length > 0 ? "* " + asts[0] : "");
     $('#astTextNextShabbatPortion').css("margin-top", asts.length > 0 ? "5px" : "0");
   }
-  $('#nextHolidayPortion').html("<li>" + descOfPortion("H", nextHoliday)[0] + "</li>");
+  $('#nextHolidayPortion').html("<li>" + descOfPortion("H", nextHoliday, "")[0] + "</li>");
 
 
   let [torahIx, torahByCh] = [{}, []];
@@ -866,10 +902,10 @@ $(document).ready(function() {
     }
     torahPortionChs[k0] = 0;
     const {book, verses, haft} = hebcal__leyning__aliyot[k0];
-    addPortionToCh(torahByCh[book-1], torah[book-1][4], parseVerses(verses), "A", k0);
+    addPortionToCh(torahByCh[book-1], torah[book-1][4], parseVerses(verses), "A", k0, "torah");
     for (const {k,b,e} of Array.isArray(haft) ? haft : [haft]) {
       const [book, sb] = neviimIx[k];
-      addPortionToCh(neviimByCh[book-1][sb], neviim[book-1][1][sb][1], [parseVerse(b), parseVerse(e)], "A", k0);
+      addPortionToCh(neviimByCh[book-1][sb], neviim[book-1][1][sb][1], [parseVerse(b), parseVerse(e)], "A", k0, "haft");
     }
   }
 
@@ -904,38 +940,38 @@ $(document).ready(function() {
         const {k,b,e} = summaryParts[i];
         if (summaryParts.some((e,j) => j > i && k == e.k && b == e.b)) { continue; }
         const book = torahIx[k];
-        addPortionToCh(torahByCh[book-1], torah[book-1][4], [parseVerse(b), parseVerse(e)], "H", k0);
+        addPortionToCh(torahByCh[book-1], torah[book-1][4], [parseVerse(b), parseVerse(e)], "H", k0, "torah");
       }
     }
     if (haft) {
       for (const {k,b,e} of Array.isArray(haft) ? haft : [haft]) {
         const [book, sb] = neviimIx[k];
-        addPortionToCh(neviimByCh[book-1][sb], neviim[book-1][1][sb][1], [parseVerse(b), parseVerse(e)], "H", k0);
+        addPortionToCh(neviimByCh[book-1][sb], neviim[book-1][1][sb][1], [parseVerse(b), parseVerse(e)], "H", k0, "haft");
       }
     }
   }
 
   for (const [[b,sb], k] of megillot) {
     for (let c = 0; c < ketuvim[b][1][sb][1].length; c++) {
-      ketuvimByCh[b][sb][c].push(["H", k, [1,ketuvim[b][1][sb][1][c]]]);
+      ketuvimByCh[b][sb][c].push(["H", k, "megillah", [1,ketuvim[b][1][sb][1][c]]]);
     }
   }
 
   for (const k0 in hallelHolidays) {
     const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
     if (hallelHolidays[k0]) {
-      addPortionToCh(arr, vs_arr, expandVerses(fullHallel[0], vs_arr), "H", k0);
+      addPortionToCh(arr, vs_arr, expandVerses(fullHallel[0], vs_arr), "H", k0, "hallel");
     }
     else {
       for (const vs of partialHallel) {
-        addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "H", k0);
+        addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "H", k0, "hallel");
       }
     }
   }
 
   for (const k0 in yizkorHolidays) {
     const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
-    addPortionToCh(arr, vs_arr, expandVerses(yizkor[0], vs_arr), "H", k0);
+    addPortionToCh(arr, vs_arr, expandVerses(yizkor[0], vs_arr), "H", k0, "yizkor");
   }
 
   for (const k0 in shabbats) {
@@ -955,7 +991,7 @@ $(document).ready(function() {
           [arr, vs_arr] = [ketuvimByCh[book-1][sb], ketuvim[book-1][1][sb][1]];
         }
         for (const vs of vss) {
-          addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "S", k0);
+          addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "S", k0, k1);
         }
       }
     }
@@ -964,7 +1000,7 @@ $(document).ready(function() {
   for (const k0 in shirShelYom) {
     const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
     for (const vs of shirShelYom[k0]) {
-      addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "Y", k0);
+      addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "Y", k0, "yom");
     }
   }
 
@@ -989,7 +1025,7 @@ $(document).ready(function() {
         $('#mouseoverBox').addClass("hidden");
         if (lastTorahPortion !== "") {
           for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-            $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+            $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
           }
         }
         lastTorahPortion = "";
@@ -1011,8 +1047,8 @@ $(document).ready(function() {
           const h = e.currentTarget.getBoundingClientRect().height;
           const v = Math.max(Math.ceil(e.clientX - l), 1);
           marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
-          $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
-          let readOn = torahByCh[b][c].filter((x,i) => x[2][0] <= v && v <= x[2][1]);
+          $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
+          let readOn = torahByCh[b][c].filter((x,i) => x[3][0] <= v && v <= x[3][1]);
           readOn = readOn.filter((x,i) => readOn.findIndex(y => x[1] == y[1]) == i);
           const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + torah[b][2] + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                               .text(torah[b][2] + " " + (c+1) + ":" + v)
@@ -1021,7 +1057,7 @@ $(document).ready(function() {
           $('#readingsText').empty();
           let asts = undefined;
           readOn.forEach(function (x) {
-            const [desc, ast] = descOfPortion(x[0],x[1]);
+            const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
             if (ast) { asts = ast; }
             $('#readingsText').append($('<li>').html(desc))
           });
@@ -1030,22 +1066,24 @@ $(document).ready(function() {
           if (readOn.length == 0 || readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
             if (lastTorahPortion !== "") {
               for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-                $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+                $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
               }
             }
             lastTorahPortion = "";
           }
           if (readOn.length > 0 && readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
             for (let i = 0; i < torahPortionChs[readOn[0][1]]; i++) {
-              $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("highlighted");
+              $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("visHighlighted");
             }
             lastTorahPortion = readOn[0][1];
           }
+          const max_left = $(window).width()-$('#mouseoverBox').width();
+          $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
         }
       });
       for (let i = 0; i < torahByCh[b][c].length; i++) {
-        const [kind, nm, [v1, v2]] = torahByCh[b][c][i];
-        const isBelow = i > 0 && torahByCh[b][c].some(function ([kind1,_,[v3,v4]],j) {
+        const [kind, nm, rd, [v1, v2]] = torahByCh[b][c][i];
+        const isBelow = i > 0 && torahByCh[b][c].some(function ([kind1,_1,_2,[v3,v4]],j) {
           if (kind === "A" && kind1 !== "A") { return false; }
           return i != j && v1 <= v4 && v3 <= v2;
         });
@@ -1092,7 +1130,7 @@ $(document).ready(function() {
           $('#mouseoverBox').addClass("hidden");
           if (lastTorahPortion !== "") {
             for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-              $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+              $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
             }
           }
           lastTorahPortion = "";
@@ -1125,8 +1163,8 @@ $(document).ready(function() {
             const h = e.currentTarget.getBoundingClientRect().height;
             const v = Math.max(Math.ceil(e.clientX - l), 1);
             marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
-            $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
-            let readOn = neviimByCh[b][sb][c].filter(x => x[2][0] <= v && v <= x[2][1]);
+            $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
+            let readOn = neviimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1]);
             readOn = readOn.filter((x,i) => readOn.findIndex(y => x[1] == y[1]) == i);
             const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + neviim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                                 .text(neviim[b][1][sb][0] + " " + (c+1) + ":" + v)
@@ -1135,7 +1173,7 @@ $(document).ready(function() {
             $('#readingsText').empty();
             let asts = undefined;
             readOn.forEach(function (x) {
-              const [desc, ast] = descOfPortion(x[0],x[1]);
+              const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
               if (ast) { asts = ast; }
               $('#readingsText').append($('<li>').html(desc))
             });
@@ -1144,22 +1182,24 @@ $(document).ready(function() {
             if (readOn.length == 0 || readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
               if (lastTorahPortion !== "") {
                 for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-                  $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+                  $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
                 }
               }
               lastTorahPortion = "";
             }
             if (readOn.length > 0 && readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
               for (let i = 0; i < torahPortionChs[readOn[0][1]]; i++) {
-                $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("highlighted");
+                $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("visHighlighted");
               }
               lastTorahPortion = readOn[0][1];
             }
+            const max_left = $(window).width()-$('#mouseoverBox').width();
+            $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
           }
         });
         for (let i = 0; i < neviimByCh[b][sb][c].length; i++) {
-          const [kind, nm, [v1, v2]] = neviimByCh[b][sb][c][i];
-          const isBelow = i > 0 && neviimByCh[b][sb][c].some(function ([kind1,_,[v3,v4]],j) {
+          const [kind, nm, rd, [v1, v2]] = neviimByCh[b][sb][c][i];
+          const isBelow = i > 0 && neviimByCh[b][sb][c].some(function ([kind1,_1,_2,[v3,v4]],j) {
             if (kind === "A" && kind1 !== "A") { return false; }
             return i != j && v1 <= v4 && v3 <= v2;
           });
@@ -1233,8 +1273,8 @@ $(document).ready(function() {
             const h = e.currentTarget.getBoundingClientRect().height;
             const v = Math.max(Math.ceil(e.clientX - l), 1);
             marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
-            $('#mouseoverBox').removeClass("hidden").css("left", e.clientX).css("top", t + h + 5);
-            let readOn = ketuvimByCh[b][sb][c].filter(x => x[2][0] <= v && v <= x[2][1]);
+            $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
+            let readOn = ketuvimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1]);
             readOn = readOn.filter((x,i) => readOn.findIndex(y => x[1] == y[1]) == i);
             const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + ketuvim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                                 .text(ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v)
@@ -1243,17 +1283,19 @@ $(document).ready(function() {
             $('#readingsText').empty();
             let asts = undefined;
             readOn.forEach(function (x) {
-              const [desc, ast] = descOfPortion(x[0],x[1]);
+              const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
               if (ast) { asts = ast; }
               $('#readingsText').append($('<li>').html(desc))
             });
             $('#astText').html(asts ? "* " + asts : "");
             $('#astText').css("margin-top", asts ? "5px" : "0");
+            const max_left = $(window).width()-$('#mouseoverBox').width();
+            $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
           }
         });
         for (let i = 0; i < ketuvimByCh[b][sb][c].length; i++) {
-          const [kind, nm, [v1, v2]] = ketuvimByCh[b][sb][c][i];
-          const isBelow = i > 0 && ketuvimByCh[b][sb][c].some(function ([kind1,_,[v3,v4]],j) {
+          const [kind, nm, rd, [v1, v2]] = ketuvimByCh[b][sb][c][i];
+          const isBelow = i > 0 && ketuvimByCh[b][sb][c].some(function ([kind1,_1,_2,[v3,v4]],j) {
             if (kind === "A" && kind1 !== "A") { return false; }
             if (["S","Y"].includes(kind) && ["S","Y"].includes(kind1)) { return false; }
             return i != j && v1 <= v4 && v3 <= v2;
@@ -1287,7 +1329,7 @@ $(document).ready(function() {
       $('#mouseoverBox').addClass("hidden");
       if (lastTorahPortion !== "") {
         for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
         }
       }
       lastTorahPortion = "";
@@ -1306,7 +1348,7 @@ $(document).ready(function() {
       $('#mouseoverBox').addClass("hidden");
       if (lastTorahPortion !== "") {
         for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("highlighted");
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
         }
       }
       lastTorahPortion = "";
