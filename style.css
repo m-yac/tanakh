@@ -80,6 +80,12 @@ blockquote {
 :target {
    background-color: #ffd;
 }
+.highlighted {
+   position: relative;;
+   background-color: #ffffcc;
+   box-shadow: -0.2em 0 #ffffcc, 0.2em 0 #ffffcc;
+   padding: 0.1em 0;
+}
 
 .buttons {
   padding-bottom: 20px;
@@ -185,7 +191,7 @@ hr {
   text-align: left;
   vertical-align: text-top;
   padding: 10px;
-  max-width: 350px;
+  max-width: 355px;
 }
 .mouseoverBox p, .mouseoverBox ul, .mouseoverBox li {
   margin: 0;
@@ -194,7 +200,7 @@ hr {
   margin-top: 5px;
 }
 
-.highlighted[style] {
+.visHighlighted[style] {
   background-color: rgb(100, 143, 255) !important;
 }
 
