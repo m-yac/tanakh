@@ -17,18 +17,23 @@
 
 <div class="explainerText">
 <p>
-  This is a visualization of which portions of the <i>Tanakh</i> (Hebrew bible)
-  are read in traditional Ashkenazi Jewish services. Each box represents a
-  chapter, sized according to its number of verses.
+  This is a visualization of which portions of the
+  <a href="https://en.wikipedia.org/wiki/Hebrew_Bible" target="_blank"><i>Tanakh</i> (Hebrew bible)</a>
+  are read in traditional
+  <a href="https://en.wikipedia.org/wiki/Ashkenazi_Jews" target="_blank">Ashkenazi Jewish</a>
+  services. Each box represents a chapter, sized according to its number of verses.
   Hovering over a spot on the diagram displays info about which chapter and
   verse it corresponds to and when it is read (click to lock this info on screen).
 </p><p>
   Regions colored
   yellow<span class="colorSwatch" style="background-color: rgb(255, 213, 51)"></span> to
   magenta<span class="colorSwatch" style="background-color: rgb(220, 38, 127)"></span>
-  correspond to weekly <i>Shabbat</i> morning readings, regions colored
+  correspond to weekly
+  <a href="https://en.wikipedia.org/wiki/Shabbat" target="_blank"><i>Shabbat</i></a>
+  morning readings, regions colored
   indigo<span class="colorSwatch" style="background-color: rgb(120, 94, 240)"></span>
-  correspond to readings for holidays, festivals, or special <i>Shabbat</i>s,
+  correspond to readings for holidays, festivals, or
+  <a href="https://en.wikipedia.org/wiki/Special_Shabbat" target="_blank">special <i>Shabbat</i>s</a>,
   and regions colored
   purple<span class="colorSwatch" style="background-color: rgb(170, 66, 184)"></span>
   correspond to parts of the text used in prayers.
@@ -71,6 +76,15 @@
     <h4>Next Holiday/Festival:</h4>
     <div style="text-align: left">
       <ul id="nextHolidayPortion"></ul>
+    </div>
+  </div>
+  <div class="smallFlexBox">
+    <h4>Reading(s) for <div class="selectContainer dateSelect">
+                         <select id="dateSelect" title="Radius of tolerance preset" aria-label="Radius of tolerance preset"></select>
+                       </div> :</h4>
+    <div style="text-align: left">
+      <ul id="portionForDate"></ul>
+      <p id="astTextPortionForDate"></p>
     </div>
   </div>
 </div>

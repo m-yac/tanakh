@@ -36,7 +36,7 @@ const portions = [
     ["Terumah", "תְּרוּמָה", "Donation", [[25,1],[27,19]]],
     ["Tetzaveh", "תְּצַוֶּה", "You Shall Command", [[27,20],[30,10]]],
     ["Ki Tisa", "כִּי תִשָּׂא", "When You Count", [[30,11],[34,35]]],
-    ["Vayakhel", "וַיַּקְהֵל", "And He Assembled", [[35,1],[38,20]], "On non-leap years this portion is combined with the next, except when <i>Rosh Hashanah</i> falls on Thursday and <i>Pesach</i> on Sunday."],
+    ["Vayakhel", "וַיַּקְהֵל", "And He Assembled", [[35,1],[38,20]], "On non-leap years this portion is combined with the next, except when " + wikiLink("Rosh Hashana") + " falls on Thursday and " + wikiLink("Pesach") + " on Sunday."],
     ["Pekudei", "פְקוּדֵי", "Accountings", [[38,21],[40,38]]]
   ],
   [
@@ -57,10 +57,10 @@ const portions = [
     ["Behaalotecha", "בְּהַעֲלֹתְךָ", "When You Raise", [[8,1],[12,16]]],
     ["Shlach", "שְׁלַח-לְךָ", "Send Out", [[13,1],[15,41]]],
     ["Korach", "קֹרַח", "Korach", [[16,1],[18,32]]],
-    ["Chukat", "חֻקַּת", "Statute", [[19,1],[22,1]], "Outside of Israel, on years where the second day of <i>Shavuot</i> falls on <i>Shabbat</i>, this portion is combined with the next."],
+    ["Chukat", "חֻקַּת", "Statute", [[19,1],[22,1]], "Outside of Israel, on years where the second day of " + wikiLink("Shavout") + " falls on " + wikiLink("Shabbat") + ", this portion is combined with the next."],
     ["Balak", "בָּלָק", "Balak", [[22,2],[25,9]]],
     ["Pinchas", "פִּינְחָס", "Phineas", [[25,10],[30,1]]],
-    ["Matot", "מַּטּוֹת", "Tribes", [[30,2],[32,42]], "This portion is combined with the next except on leap years where either the leap month has five <i>Shabbat</i>s or outside of Israel where the eighth day of <i>Pesach</i> falls on <i>Shabbat</i>."],
+    ["Matot", "מַּטּוֹת", "Tribes", [[30,2],[32,42]], "This portion is combined with the next except on leap years where either the leap month has five " + wikiLink("<i>Shabbat</i>s", undefined, "Shabbat", true) + " or outside of Israel where the eighth day of " + wikiLink("Pesach") + " falls on " + wikiLink("Shabbat") + "."],
     ["Masei", "מַסְעֵי", "Journeys", [[33,1],[36,13]]]
   ],
   [
@@ -71,10 +71,10 @@ const portions = [
     ["Shoftim", "שֹׁפְטִים", "Judges", [[16,18],[21,9]]],
     ["Ki Teitzei", "כִּי-תֵצֵא", "When You Go Out", [[21,10],[25,19]]],
     ["Ki Tavo", "כִּי-תָבוֹא", "When You Come In", [[26,1],[29,8]]],
-    ["Nitzavim", "נִצָּבִים", "Standing", [[29,9],[30,20]], "This portion is combined with the next except on years where there are two <i>Shabbat</i>s between <i>Rosh Hashanah</i> and <i>Sukkot</i>."],
+    ["Nitzavim", "נִצָּבִים", "Standing", [[29,9],[30,20]], "This portion is combined with the next except on years where there are two " + wikiLink("<i>Shabbat</i>s", undefined, "Shabbat", true) + " between " + wikiLink("Rosh Hashana") + " and " + wikiLink("Sukkot") + "."],
     ["Vayelech", "וַיֵּלֶךְ", "And He Went", [[31,1],[31,30]]],
     ["Haazinu", "הַאֲזִינוּ", "Listen", [[32,1],[32,52]]],
-    ["V'Zot HaBerachah", "וְזֹאת הַבְּרָכָה", "And This Is the Blessing", [[33,1],[34,12]], "This portion is skipped since its contents are always read on <i>Simchat Torah</i>."]
+    ["V'Zot HaBerachah", "וְזֹאת הַבְּרָכָה", "And This Is the Blessing", [[33,1],[34,12]], "This portion is skipped since its contents are always read on " + wikiLink("Simchat Torah") + "."]
   ]
 ];
 
@@ -223,7 +223,7 @@ const shabbatReadings = {
     [["Leviticus",    [[[23,44]]]]],
   "Vay'chulu":
     [["Genesis",      [[[2,1], [2,3]]]]],
-  "Pesukey De-zimra (before Ashrei)":
+  "Pesukei Dezimra (before Ashrei)":
     [["Psalms",       [[30]]],
      ["I Chronicles", [[[16,8], [16,36]]]],
      ["Psalms",       [[[104,31]],
@@ -241,16 +241,16 @@ const shabbatReadings = {
                        [[94,14]],
                        [[78,38]],
                        [[20,10]]]]],
-  "Pesukey De-zimra (additions for Shabbat)":
+  "Pesukei Dezimra (additions for Shabbat)":
     [["Psalms",       [[19], [34], [90], [91], [135], [136], [33], [92], [93]]]],
-  "Pesukey De-zimra (addition except on Shabbat)":
+  "Pesukei Dezimra (addition except on Shabbat)":
     [["Psalms",       [[100]]]],
   "Ashrei":
     [["Psalms",       [[[84,5]],
                        [[144,15]],
                        [145],
                        [[115,18]]]]],
-  "Pesukey De-zimra (after Ashrei)":
+  "Pesukei Dezimra (after Ashrei)":
     [["Psalms",       [[146, 150]]],
      ["I Chronicles", [[[29,10], [29,13]]]],
      ["Nehemiah",     [[[9,6], [9,11]]]]],
@@ -287,11 +287,11 @@ const shabbats = {
      "Vay'chulu"],
   "Shabbat or festival morning":
     ["Ma Tovu",
-     "Pesukey De-zimra (before Ashrei)",
-     "Pesukey De-zimra (additions for Shabbat)",
-     "Pesukey De-zimra (addition except on Shabbat)",
+     "Pesukei Dezimra (before Ashrei)",
+     "Pesukei Dezimra (additions for Shabbat)",
+     "Pesukei Dezimra (addition except on Shabbat)",
      "Ashrei",
-     "Pesukey De-zimra (after Ashrei)",
+     "Pesukei Dezimra (after Ashrei)",
      "Mi Chamocha",
      "Shema",
      "After the Shema",
@@ -574,89 +574,105 @@ function addPortionToCh(arr, vs_arr, vs, s1, s2, s3) {
   }
 }
 
+function wikiLink(s, p, exact, noItalics) {
+  const pg = exact ? exact : encodeURIComponent(s);
+  const tx = (noItalics ? s : "<i>" + s + "</i>") + (p ? " (" + p + ")" : "");
+  return $("<a>").attr("href", "https://en.wikipedia.org/wiki/" + pg)
+                 .html(tx).attr("target", "_blank").prop("outerHTML");
+}
+
+const pesachLink = wikiLink("Pesach", "Passover");
+const tishaBAvLink = wikiLink("Tish'a B'Av", "Day of fasting for the 9th of <i>Av</i>");
+const roshHashanaLink = wikiLink("Rosh Hashana", "Jewish New Year");
+const yomKippurLink = wikiLink("Yom Kippur", "Day of Atonement");
+const simchatTorahLink = wikiLink("Simchat Torah" ,"Celebration of the <i>Torah</i>");
+const roshChodeshLink = wikiLink("Rosh Chodesh", "Festival of the New Moon");
+const arkLink = wikiLink("Ark", undefined, "Torah_ark", true);
+
 const holidayKeyMap = {
-  "Pesach I": "First day of <i>Pesach</i> (Passover)",
-  "Pesach II": "Second day of <i>Pesach</i> (Passover)",
-  "Pesach Chol ha-Moed Day 1": "Third day of <i>Pesach</i> (Passover)",
-  "Pesach Chol ha-Moed Day 2": "Fourth day of <i>Pesach</i> (Passover)",
-  "Pesach Chol ha-Moed Day 3": "Fifth day of <i>Pesach</i> (Passover)",
-  "Pesach Chol ha-Moed Day 4": "Sixth day of <i>Pesach</i> (Passover)",
-  "Pesach Shabbat Chol ha-Moed": "<i>Shabbat</i> of <i>Pesach</i> (Passover)",
-  "Pesach VII": "Seventh day of <i>Pesach</i> (Passover)",
-  "Pesach VIII": "Eighth day of <i>Pesach</i> (Passover)",
-  "Shavuot I": "First day of <i>Shavuot</i>",
-  "Shavuot II": "Second day of <i>Shavuot</i>",
-  "Asara B'Tevet": "Day of a minor fast", // "<i>Asara B'Tevet</i> (Minor fast for the 10th of <i>Tevet</i>)",
-  "Ta'anit Bechorot": "Day of a minor fast", // "<i>Ta'anit Bechorot</i> (Minor fast for firstborn children the day before <i>Pesach</i> (Passover))",
-  "Ta'anit Esther": "Day of a minor fast", // "<i>Ta'anit Esther</i> (Minor fast for <i>Purim</i>)",
-  "Tzom Gedaliah": "Day of a minor fast", // "<i>Tzom Gedaliah</i> (Minor fast for the assassination of <i>Gedaliah</i>)",
-  "Tzom Tammuz": "Day of a minor fast", // "<i>Tzom Tammuz</i> (Minor fast for the 17th of <i>Tammuz</i>)",
-  "Tish'a B'Av": "<i>Tish'a B'Av</i> (Day of fasting for the 9th of <i>Av</i>)",
-  "Rosh Hashana I": "First day of <i>Rosh Hashana</i> (Jewish New Year)",
-  "Rosh Hashana II": "Second day of <i>Rosh Hashana</i> (Jewish New Year)",
-  "Yom Kippur": "Morning of <i>Yom Kippur</i> (Day of Atonement)",
-  "Yom Kippur (Mincha, Traditional)": "Evening of <i>Yom Kippur</i> (Day of Atonement)",
-  "Sukkot I": "First day of <i>Sukkot</i>",
-  "Sukkot II": "Second day of <i>Sukkot</i>",
-  "Sukkot Chol ha-Moed Day 1": "Third day of <i>Sukkot</i>",
-  "Sukkot Chol ha-Moed Day 2": "Fourth day of <i>Sukkot</i>",
-  "Sukkot Chol ha-Moed Day 3": "Fifth day of <i>Sukkot</i>",
-  "Sukkot Chol ha-Moed Day 4": "Sixth day of <i>Sukkot</i>",
-  // "Sukkot Chol ha-Moed Day 5": "Seventh day of <i>Sukkot</i>",
-  "Sukkot Shabbat Chol ha-Moed": "<i>Shabbat</i> of <i>Sukkot</i>",
-  "Sukkot Final Day (Hoshana Raba)": "<i>Hoshana Raba</i> (seventh day of <i>Sukkot</i>)",
-  "Shmini Atzeret": "<i>Shmini Atzeret</i> (eighth day of <i>Sukkot</i>)",
-  "Erev Simchat Torah": "Evening before <i>Simchat Torah</i> (Celebration of the <i>Torah</i>)",
-  "Simchat Torah": "<i>Simchat Torah</i> (Celebration of the <i>Torah</i>)",
-  "Shabbat Chanukah": "First <i>Shabbat</i> of <i>Chanukah</i>",
-  "Shabbat Chanukah II": "Second <i>Shabbat</i> of <i>Chanukah</i>",
-  "Shabbat Rosh Chodesh Chanukah": "<i>Chanukah</i> on <i>Shabbat</i> and <i>Rosh Chodesh</i>",
-  "Chanukah Day 1": "First day of <i>Chanukah</i>",
-  "Chanukah Day 2": "Second day of <i>Chanukah</i>",
-  "Chanukah Day 3": "Third day of <i>Chanukah</i>",
-  "Chanukah Day 4": "Fourth day of <i>Chanukah</i>",
-  "Chanukah Day 5": "Fifth day of <i>Chanukah</i>",
-  "Chanukah Day 6": "Sixth day of <i>Chanukah</i>",
-  "Chanukah Day 7": "Seventh day of <i>Chanukah</i>",
-  "Chanukah Day 7 (on Rosh Chodesh)": "Seventh day of <i>Chanukah</i> on <i>Rosh Chodesh</i>",
-  "Chanukah Day 8": "Eighth day of <i>Chanukah</i>",
-  "Purim": "<i>Purim</i>",
-  "Shabbat HaChodesh": "<i>Shabbat HaChodesh</i>",
-  "Shabbat HaGadol": "<i>Shabbat HaGadol</i>",
-  "Shabbat Nachamu": "<i>Shabbat Nachamu</i>",
-  "Shabbat Parah": "<i>Shabbat Parah</i>",
-  "Shabbat Shekalim": "<i>Shabbat Shekalim</i>",
-  "Shabbat Shuva": "<i>Shabbat Shuva</i>",
-  "Shabbat Zachor": "<i>Shabbat Zachor</i>",
-  "Rosh Chodesh": "<i>Rosh Chodesh</i> (Festival of the New Moon)",
-  "Shabbat Rosh Chodesh": "<i>Rosh Chodesh</i> (Festival of the New Moon) on Shabbat",
-  "Shabbat Machar Chodesh": "<i>Shabbat</i> before <i>Rosh Chodesh</i> (Festival of the New Moon)"
+  "Pesach I": "First day of " + pesachLink,
+  "Pesach II": "Second day of " + pesachLink,
+  "Pesach Chol ha-Moed Day 1": "Third day of " + pesachLink,
+  "Pesach Chol ha-Moed Day 2": "Fourth day of " + pesachLink,
+  "Pesach Chol ha-Moed Day 3": "Fifth day of " + pesachLink,
+  "Pesach Chol ha-Moed Day 4": "Sixth day of " + pesachLink,
+  "Pesach Shabbat Chol ha-Moed": "<i>Shabbat</i> of " + pesachLink,
+  "Pesach VII": "Seventh day of " + pesachLink,
+  "Pesach VIII": "Eighth day of " + pesachLink,
+  "Shavuot I": "First day of " + wikiLink("Shavuot"),
+  "Shavuot II": "Second day of " + wikiLink("Shavuot"),
+  "Asara B'Tevet": wikiLink("Asara B'Tevet", "Minor fast for the 10th of <i>Tevet</i>", "Tenth_of_Tevet"),
+  "Ta'anit Bechorot": wikiLink("Ta'anit Bechorot", "Minor fast for firstborn children the day before <i>Pesach</i> (Passover)", "Fast_of_the_Firstborn"),
+  "Ta'anit Esther": wikiLink("Ta'anit Esther", "Minor fast for <i>Purim</i>", "Fast_of_Esther"),
+  "Tzom Gedaliah": wikiLink("Tzom Gedaliah", "Minor fast for the assassination of <i>Gedaliah</i>", "Fast_of_Gedalia"),
+  "Tzom Tammuz": wikiLink("Tzom Tammuz", "Minor fast for the 17th of <i>Tammuz</i>", "Seventeenth_of_Tammuz"),
+  "Tish'a B'Av": tishaBAvLink,
+  "Rosh Hashana I": "First day of " + roshHashanaLink,
+  "Rosh Hashana II": "Second day of " + roshHashanaLink,
+  "Yom Kippur": "Morning of " + yomKippurLink,
+  "Yom Kippur (Mincha, Traditional)": "Evening of " + yomKippurLink,
+  "Sukkot I": "First day of " + wikiLink("Sukkot"),
+  "Sukkot II": "Second day of " + wikiLink("Sukkot"),
+  "Sukkot Chol ha-Moed Day 1": "Third day of " + wikiLink("Sukkot"),
+  "Sukkot Chol ha-Moed Day 2": "Fourth day of " + wikiLink("Sukkot"),
+  "Sukkot Chol ha-Moed Day 3": "Fifth day of " + wikiLink("Sukkot"),
+  "Sukkot Chol ha-Moed Day 4": "Sixth day of " + wikiLink("Sukkot"),
+  // "Sukkot Chol ha-Moed Day 5": "Seventh day of " + wikiLink("Sukkot"),
+  "Sukkot Shabbat Chol ha-Moed": wikiLink("Shabbat") + " of " + wikiLink("Sukkot"),
+  "Sukkot Final Day (Hoshana Raba)": wikiLink("Hoshana Raba") + " (seventh day of " + wikiLink("Sukkot") + ")",
+  "Shmini Atzeret": wikiLink("Shmini Atzeret") + " (eighth day of " + wikiLink("Sukkot") + ")",
+  "Erev Simchat Torah": "Evening before " + simchatTorahLink,
+  "Simchat Torah": simchatTorahLink ,
+  "Shabbat Chanukah": "First " + wikiLink("Shabbat") + " of " + wikiLink("Chanukah"),
+  "Shabbat Chanukah II": "Second " + wikiLink("Shabbat") + " of " + wikiLink("Chanukah"),
+  "Shabbat Rosh Chodesh Chanukah": wikiLink("Chanukah") + " on " + wikiLink("Shabbat") + " and " + wikiLink("Rosh Chodesh"),
+  "Chanukah Day 1": "First day of " + wikiLink("Chanukah"),
+  "Chanukah Day 2": "Second day of " + wikiLink("Chanukah"),
+  "Chanukah Day 3": "Third day of " + wikiLink("Chanukah"),
+  "Chanukah Day 4": "Fourth day of " + wikiLink("Chanukah"),
+  "Chanukah Day 5": "Fifth day of " + wikiLink("Chanukah"),
+  "Chanukah Day 6": "Sixth day of " + wikiLink("Chanukah"),
+  "Chanukah Day 7": "Seventh day of " + wikiLink("Chanukah"),
+  "Chanukah Day 7 (on Rosh Chodesh)": "Seventh day of " + wikiLink("Chanukah") + " on " + wikiLink("Rosh Chodesh"),
+  "Chanukah Day 8": "Eighth day of " + wikiLink("Chanukah"),
+  "Purim": wikiLink("Purim"),
+  "Shabbat HaChodesh": wikiLink("Shabbat HaChodesh"),
+  "Shabbat HaGadol": wikiLink("Shabbat HaGadol"),
+  "Shabbat Nachamu": wikiLink("Shabbat Nachamu"),
+  "Shabbat Parah": wikiLink("Shabbat Parah"),
+  "Shabbat Shekalim": wikiLink("Shabbat Shekalim"),
+  "Shabbat Shuva": wikiLink("Shabbat Shuva"),
+  "Shabbat Zachor": wikiLink("Shabbat Zachor"),
+  "Rosh Chodesh": roshChodeshLink,
+  "Shabbat Rosh Chodesh": roshChodeshLink + " on " + wikiLink("Shabbat"),
+  "Shabbat Machar Chodesh": wikiLink("Shabbat") + " before " + roshChodeshLink
 };
 
 const shabbatKeyMap = {
-  "Shabbat or festival evening": "<i>Shabbat</i> or festival evening",
-  "Shabbat or festival morning": "<i>Shabbat</i> or festival morning",
-  "Ma Tovu": "<b><i>Ma Tovu</i></b>",
-  "Shema": "<b><i>Shema</i></b>",
-  "After the Shema": "After the <i>Shema</i>",
+  "Shabbat or festival evening": wikiLink("Shabbat") + " or festival evening",
+  "Shabbat or festival morning": wikiLink("Shabbat") + " or festival morning",
+  "Ma Tovu": "<b>" + wikiLink("Ma Tovu") + "</b>",
+  "Shema": "<b>" + wikiLink("Shema") + "</b>",
+  "After the Shema": "After the " + wikiLink("Shema"),
   "Veshamru": "<b><i>Veshamru</i></b>",
   "Proclaiming the Festivals": "Proclaiming the Festivals",
-  "Pesukey De-zimra (before Ashrei)": "<i>Pesukey De-zimra</i> (before <i>Ashrei</i>)",
-  "Ashrei": "<b><i>Ashrei</i></b>",
-  "Pesukey De-zimra (additions for Shabbat)":  "<i>Pesukey De-zimra</i> (additions for <i>Shabbat</i> and <i>Yom Tov</i>)",
-  "Pesukey De-zimra (addition except on Shabbat)":  "<i>Pesukey De-zimra</i> (addition except on <i>Shabbat</i>, <i>Yom Tov</i>, and certain holidays)",
-  "Pesukey De-zimra (after Ashrei)": "<i>Pesukey De-zimra</i> (after <i>Ashrei</i>)",
-  "Mi Chamocha": "<b><i>Mi Chamocha</i> (Song of the Sea)</b>",
-  "Kedushah": "<b><i>Kedushah</i></b>",
-  "Returning the Torah to the Ark": "<b>Returning the <i>Torah</i> to the Ark</b>",
-  "Returning the Torah to the Ark (additional verses)": "Returning the <i>Torah</i> to the Ark (additional verses)"
+  "Pesukei Dezimra (before Ashrei)": wikiLink("Pesukei Dezimra") + " (before " + wikiLink("Ashrei") + ")",
+  "Ashrei": "<b>" + wikiLink("Ashrei") + "</b>",
+  "Pesukei Dezimra (additions for Shabbat)":  wikiLink("Pesukei Dezimra") + " (additions for " + wikiLink("Shabbat") + " and festivals)",
+  "Pesukei Dezimra (addition except on Shabbat)":  wikiLink("Pesukei Dezimra") + " (addition except on " + wikiLink("Shabbat") + " and certain festivals)",
+  "Pesukei Dezimra (after Ashrei)": wikiLink("Pesukei Dezimra") + " (after " + wikiLink("Ashrei") + ")",
+  "Mi Chamocha": "<b>" + wikiLink("Mi Chamocha", "Song of the Sea") + "</b>",
+  "Kedushah": "<b>" + wikiLink("Kedushah", undefined, "Kedushah_(prayer)#Kedushah_in_the_Amidah") + "</b>",
+  "Returning the Torah to the Ark": "<b>Returning the <i>Torah</i> to the " + arkLink + "</b>",
+  "Returning the Torah to the Ark (additional verses)": "Returning the <i>Torah</i> to the " + arkLink + " (additional verses)"
 };
 
 const portions_flat = [].concat.apply([], portions);
 var descOfPortion_cache = {};
-function descOfPortion(nm, k, rd, hideAst) {
+function descOfPortion(nm, k, rds, hideAst) {
+  if (rds == undefined) { rds = []; }
   if (descOfPortion_cache[[nm,k]] != undefined) {
-    return [descOfPortion_cache[[nm,k]][0](rd), descOfPortion_cache[[nm,k]][1]];
+    return [descOfPortion_cache[[nm,k]][0](rds), descOfPortion_cache[[nm,k]][1]];
   }
   const h = ' class="highlighted"';
   if (nm == "A") {
@@ -664,37 +680,38 @@ function descOfPortion(nm, k, rd, hideAst) {
     const {num} = hebcal__leyning__aliyot[k];
     let str1 = "<b><i>Shabbat</i> week " + num;
     if (!hideAst && portions_flat[num-1][4]) { str1 += "*"; }
-    if (portionDates[k]) { str1 += " (" + portionDates[k] + ")"; }
+    if (portionDates[k]) { str1 += " (" + portionDates[k].toLocaleDateString() + ")"; }
     str1 += ": <i>Parashat " + k + "</i> ";
     str1 += "(" + portions_flat[num-1][2] + ")</b>";
     str1 += "<ul>";
     str1 += "<li><span";
     let str2 = ">" + summary + "</span></li>";
     str2 += "<li><span";
-    let str3 = "><i>Haftarah</i>: " + haftara + "</span></li>";
+    let str3 = ">" + wikiLink("Haftarah") + ": " + haftara + "</span></li>";
     str3 += "</ul>";
-    const fn = function (rdi) {
+    const fn = function (rdsi) {
       // for now, we ignore highligting here
-      rdi = "";
-      return str1 + (rdi == "torah" ? h : "") +
-             str2 + (rdi == "haft" ? h : "") +
+      rdsi = [];
+      return str1 + (rdsi.includes("torah") ? h : "") +
+             str2 + (rdsi.includes("haft") ? h : "") +
              str3;
     };
     descOfPortion_cache[[nm,k]] = [fn, portions_flat[num-1][4]];
-    return [fn(rd)];
+    return [fn(rds), portions_flat[num-1][4]];
   }
   if (nm == "H") {
     const {summary, haftara} = hebcal__leyning.getLeyningForHolidayKey(k);
-    const k_fmt = holidayKeyMap[k];
+    let k_fmt = holidayKeyMap[k];
+    if (!k_fmt && k.includes("Rosh Chodesh")) { k_fmt = k.replace("Rosh Chodesh", wikiLink("Rosh Chodesh")); }
     let str1 = "<b>" + (k_fmt ? k_fmt : k);
-    if (portionDates[k]) { str1 += " (" + portionDates[k] + ")"; }
+    if (portionDates[k]) { str1 += " (" + portionDates[k].toLocaleDateString() + ")"; }
     str1 += "</b><ul>"
     let [str2, str3] = ["", ""];
     if (summary && haftara) {
       str1 += "<li><span";
       str2 = ">" + summary + "</span></li>";
       str2 += "<li><span";
-      str3 = "><i>Haftarah</i>: " + haftara + "</span></li>";
+      str3 = ">" + wikiLink("Haftarah") + ": " + haftara + "</span></li>";
     }
     else if (summary) {
       str1 += "<li><span";
@@ -702,19 +719,20 @@ function descOfPortion(nm, k, rd, hideAst) {
     }
     else if (haftara) {
       str1 += "<li><span";
-      str3 = ">Additional <i>Haftarah</i>: " + haftara + "</span></li>";
+      str3 = ">Additional " + wikiLink("Haftarah") + ": " + haftara + "</span></li>";
     }
     let str4 = "";
     const i = megillot.findIndex(e => e[1] === k);
     if (i >= 0) {
       const [b,sb] = megillot[i][0];
       str3 += "<li><span";
-      str4 = "><i>Megillah</i>: " + ketuvim[b][1][sb][0] + "</span></li>";
+      str4 = ">" + wikiLink("Megillah", undefined, "Five_Megillot") + ": ";
+      str4 += ketuvim[b][1][sb][0] + "</span></li>";
     }
     let str5 = "";
     if (k in hallelHolidays) {
       str4 += "<li><span";
-      str5 = "><i>Hallel</i>: "
+      str5 = ">" + wikiLink("Hallel") + ": "
       if (hallelHolidays[k]) {
         str5 += fmtNameAndMultiVerses(["Psalms", fullHallel]);
       }
@@ -726,23 +744,23 @@ function descOfPortion(nm, k, rd, hideAst) {
     let str6 = "";
     if (k in yizkorHolidays) {
       str5 += "<li><span";
-      str6 = "><i>Yizkor</i>: ";
+      str6 = ">" + wikiLink("Yizkor") + ": ";
       str6 += fmtNameAndMultiVerses(["Psalms", yizkor]);
       str6 += "</span></li>";
     }
     str6 += "</ul>";
-    const fn = function (rdi) {
+    const fn = function (rdsi) {
       // for now, we ignore highligting here
-      rdi = "";
-      return str1 + (rdi == "torah" ? h : "") +
-             str2 + (rdi == "haft" ? h : "") +
-             str3 + (rdi == "megillah" ? h : "") +
-             str4 + (rdi == "hallel" ? h : "") +
-             str5 + (rdi == "yizkor" ? h : "") +
+      rdsi = [];
+      return str1 + (rdsi.includes("torah") ? h : "") +
+             str2 + (rdsi.includes("haft") ? h : "") +
+             str3 + (rdsi.includes("megillah") ? h : "") +
+             str4 + (rdsi.includes("hallel") ? h : "") +
+             str5 + (rdsi.includes("yizkor") ? h : "") +
              str6;
     };
     descOfPortion_cache[[nm,k]] = [fn, undefined];
-    return [fn(rd), undefined];
+    return [fn(rds), undefined];
   }
   if (nm == "S") {
     const k_fmt = shabbatKeyMap[k];
@@ -750,7 +768,7 @@ function descOfPortion(nm, k, rd, hideAst) {
     for (const k1 of shabbats[k]) {
       const k1_fmt = shabbatKeyMap[k1];
       str += "<li><span";
-      if (k1 == rd) { str += h; }
+      if (rds.includes(k1)) { str += h; }
       str += ">" + (k1_fmt ? k1_fmt : "<i>" + k1 + "</i>") + ": ";
       str += shabbatReadings[k1].map(fmtNameAndMultiVerses).join("; ");
       str += "</span></li>"
@@ -760,7 +778,7 @@ function descOfPortion(nm, k, rd, hideAst) {
     return [str, undefined];
   }
   if (nm == "Y") {
-    let str = "<b>" + k + " <i>Shir Shel Yom</i> (Song of the Day)</b><ul>";
+    let str = "<b>" + k + " " + wikiLink("Shir Shel Yom", "Song of the Day") + "</b><ul>";
     str += "<li><span";
     // for now, we ignore highligting here
     // str += h;
@@ -796,23 +814,23 @@ $(document).ready(function() {
     d.setTime(d.getTime() + 60 * 60 * 24 * 1000 - 1);
     if (today <= d) {
       if (e.parsha) {
-        e.parsha.forEach(p => portionDates[p] = d.toLocaleDateString());
+        e.parsha.forEach(p => portionDates[p] = d);
       }
       const k = hebcal__leyning.getLeyningKeyForEvent(e);
       if (k) {
-        portionDates[k] = d.toLocaleDateString();
+        portionDates[k] = d;
         if (k == "Yom Kippur") {
-          portionDates["Yom Kippur (Mincha, Traditional)"] = d.toLocaleDateString();
+          portionDates["Yom Kippur (Mincha, Traditional)"] = d;
         }
         if (k.includes("(on Shabbat)")) {
           const k1 = k.replace(" (on Shabbat)", "");
-          portionDates[k1] = d.toLocaleDateString();
+          portionDates[k1] = d;
           if (k1.includes("Pesach") && portionDates["Pesach Shabbat Chol ha-Moed"] == undefined) {
-            portionDates["Pesach Shabbat Chol ha-Moed"] = d.toLocaleDateString();
+            portionDates["Pesach Shabbat Chol ha-Moed"] = d;
           }
         }
         if (k == "Sukkot Shabbat Chol ha-Moed" && portionDates[k] == undefined) {
-          portionDates["Sukkot Chol ha-Moed Day " + e.cholHaMoedDay] = d.toLocaleDateString();
+          portionDates["Sukkot Chol ha-Moed Day " + e.cholHaMoedDay] = d;
         }
       }
     }
@@ -823,27 +841,27 @@ $(document).ready(function() {
     if (e.parsha) {
       e.parsha.forEach(function (p) {
         if (portionDates[p] == undefined) {
-          portionDates[p] = d.toLocaleDateString();
+          portionDates[p] = d;
         }
       });
     }
     const k = hebcal__leyning.getLeyningKeyForEvent(e);
     if (k && portionDates[k] == undefined) {
-      portionDates[k] = d.toLocaleDateString();
+      portionDates[k] = d;
       if (k == "Yom Kippur") {
-        portionDates["Yom Kippur (Mincha, Traditional)"] = d.toLocaleDateString();
+        portionDates["Yom Kippur (Mincha, Traditional)"] = d;
       }
       if (k.includes(" (on Shabbat)")) {
         const k1 = k.replace(" (on Shabbat)", "");
         if (portionDates[k1] == undefined) {
-          portionDates[k1] = d.toLocaleDateString();
+          portionDates[k1] = d;
         }
         if (k1.includes("Pesach") && portionDates["Pesach Shabbat Chol ha-Moed"] == undefined) {
-          portionDates["Pesach Shabbat Chol ha-Moed"] = d.toLocaleDateString();
+          portionDates["Pesach Shabbat Chol ha-Moed"] = d;
         }
       }
       if (k == "Sukkot Shabbat Chol ha-Moed" && portionDates[k] == undefined) {
-        portionDates["Sukkot Chol ha-Moed Day " + e.cholHaMoedDay] = d.toLocaleDateString();
+        portionDates["Sukkot Chol ha-Moed Day " + e.cholHaMoedDay] = d;
       }
     }
   }
@@ -861,13 +879,70 @@ $(document).ready(function() {
     if (!nextParshas && !nextHoliday) { break; }
   }
   // $('#nextShabbatPortionPlural').text(nextParshas.length == 1 ? "portion" : "portions");
-  $('#nextShabbatPortion').html("<li>" + nextParshas.map(p => descOfPortion("A", p, "", nextParshas.length == 1)[0]).join("</li><li>") + "</li>");
+  $('#nextShabbatPortion').html("<li>" + nextParshas.map(p => descOfPortion("A", p, [], nextParshas.length == 1)[0]).join("</li><li>") + "</li>");
   if (nextParshas.length > 1) {
-    const asts = nextParshas.map(p => descOfPortion("A", p, "")[1]).filter(x => x);
+    const asts = nextParshas.map(p => descOfPortion("A", p, [])[1]).filter(x => x);
     $('#astTextNextShabbatPortion').html(asts.length > 0 ? "* " + asts[0] : "");
     $('#astTextNextShabbatPortion').css("margin-top", asts.length > 0 ? "5px" : "0");
   }
-  $('#nextHolidayPortion').html("<li>" + descOfPortion("H", nextHoliday, "")[0] + "</li>");
+  $('#nextHolidayPortion').html("<li>" + descOfPortion("H", nextHoliday, [])[0] + "</li>");
+
+  let [datePortions, dates] = [{}, []];
+  for (const k in portionDates) {
+    const res = hebcal__leyning.getLeyningForHolidayKey(k);
+    const {summaryParts, haft} = res ? res : {};
+    if (k.includes(" (on Shabbat)")) {
+      const o = hebcal__leyning.getLeyningForHolidayKey(k.split(" (on Shabbat)")[0]);
+      if (o && ""+summaryParts === ""+o.summaryParts && ""+haft === ""+o.haft) {
+        continue;
+      }
+    }
+    if (k.includes(" (on Rosh Chodesh)")) {
+      const o = hebcal__leyning.getLeyningForHolidayKey(k.split(" (on Rosh Chodesh)")[0]);
+      if (o && ""+summaryParts === ""+o.summaryParts && ""+haft === ""+o.haft) {
+        continue;
+      }
+    }
+    if (k.includes("Shushan") || k.includes("Alternate")) { continue; }
+    if (k == "Sukkot Chol ha-Moed Day 5") { continue; }
+    const d = portionDates[k];
+    const d_str = d.toLocaleDateString();
+    if (!(d_str in datePortions)) { datePortions[d_str] = []; }
+    datePortions[d_str].push(k);
+    if (dates.every(d1 => d1.getTime() != d.getTime())) { dates.push(d); }
+  }
+  dates.sort((a,b) => a - b);
+  $('#dateSelect').append($('<option>').html("—"));
+  for (const d of dates) {
+    const d_str = d.toLocaleDateString();
+    $('#dateSelect').append($('<option>').html(d_str));
+    datePortions[d_str] = datePortions[d_str].map(function (k) {
+      const nm = k in holidayKeyMap || k.includes("Rosh Chodesh") ? "H" : "A";
+      return [nm, k];
+    });
+    datePortions[d_str].sort((a,b) => b[0] < a[0] ? 1 : a[0] < b[0] ? -1 : 0);
+  }
+  $('#dateSelect').change(function () {
+    $('#portionForDate').empty();
+    if ($('#dateSelect').val() != "—") {
+      const ks = datePortions[$('#dateSelect').val()];
+      const hideAsts = ks.filter(([nm,_]) => nm == "A").length <= 1;
+      let asts = [];
+      for (const [nm, k] of ks) {
+        const [desc, ast] = descOfPortion(nm, k, [], hideAsts);
+        $('#portionForDate').append("<li>" + desc + "</li>");
+        if (ast) { asts.push(ast); }
+      }
+      if (!hideAsts) {
+        $('#astTextPortionForDate').html(asts.length > 0 ? "* " + asts[0] : "");
+        $('#astTextPortionForDate').css("margin-top", asts.length > 0 ? "5px" : "0");
+      }
+      else {
+        $('#astTextPortionForDate').empty();
+        $('#astTextPortionForDate').css("margin-top", 0);
+      }
+    }
+  });
 
 
   let [torahIx, torahByCh] = [{}, []];
@@ -924,7 +999,6 @@ $(document).ready(function() {
       }
     }
     if (k0.includes("Shushan") || k0.includes("Alternate")) { continue; }
-    if (["Ta'anit Bechorot", "Ta'anit Esther", "Tzom Gedaliah", "Tzom Tammuz"].includes(k0)) { continue; }
     if (k0 == "Sukkot Chol ha-Moed Day 5") { continue; }
     if (k0 == "Sukkot Shabbat Chol ha-Moed") {
       summaryParts = [summaryParts[0], {k: "Numbers", b: "29:17", e: "29:34"}];
@@ -1048,8 +1122,13 @@ $(document).ready(function() {
           const v = Math.max(Math.ceil(e.clientX - l), 1);
           marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
           $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
-          let readOn = torahByCh[b][c].filter((x,i) => x[3][0] <= v && v <= x[3][1]);
-          readOn = readOn.filter((x,i) => readOn.findIndex(y => x[1] == y[1]) == i);
+          let readOn = torahByCh[b][c].filter((x,i) => x[3][0] <= v && v <= x[3][1])
+                                      .map(x => [x[0], x[1], [x[2]], x[3]]);
+          readOn = readOn.filter(function (x,i) {
+            const i_fst = readOn.findIndex(y => x[1] == y[1]);
+            if (i_fst == i) { return true; }
+            readOn[i_fst][2] = readOn[i_fst][2].concat(x[2]);
+          });
           const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + torah[b][2] + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                               .text(torah[b][2] + " " + (c+1) + ":" + v)
                               .attr("target", "blank");
@@ -1164,8 +1243,13 @@ $(document).ready(function() {
             const v = Math.max(Math.ceil(e.clientX - l), 1);
             marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
             $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
-            let readOn = neviimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1]);
-            readOn = readOn.filter((x,i) => readOn.findIndex(y => x[1] == y[1]) == i);
+            let readOn = neviimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1])
+                                        .map(x => [x[0], x[1], [x[2]], x[3]]);
+            readOn = readOn.filter(function (x,i) {
+              const i_fst = readOn.findIndex(y => x[1] == y[1]);
+              if (i_fst == i) { return true; }
+              readOn[i_fst][2] = readOn[i_fst][2].concat(x[2]);
+            });
             const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + neviim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                                 .text(neviim[b][1][sb][0] + " " + (c+1) + ":" + v)
                                 .attr("target", "blank");
@@ -1274,8 +1358,13 @@ $(document).ready(function() {
             const v = Math.max(Math.ceil(e.clientX - l), 1);
             marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
             $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
-            let readOn = ketuvimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1]);
-            readOn = readOn.filter((x,i) => readOn.findIndex(y => x[1] == y[1]) == i);
+            let readOn = ketuvimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1])
+                                        .map(x => [x[0], x[1], [x[2]], x[3]]);
+            readOn = readOn.filter(function (x,i) {
+              const i_fst = readOn.findIndex(y => x[1] == y[1]);
+              if (i_fst == i) { return true; }
+              readOn[i_fst][2] = readOn[i_fst][2].concat(x[2]);
+            });
             const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + ketuvim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
                                 .text(ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v)
                                 .attr("target", "blank");
