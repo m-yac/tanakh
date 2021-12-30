@@ -725,7 +725,7 @@ function descOfPortion(nm, k, rd, hideAst) {
     }
     let str6 = "";
     if (k in yizkorHolidays) {
-      str4 += "<li><span";
+      str5 += "<li><span";
       str6 = "><i>Yizkor</i>: ";
       str6 += fmtNameAndMultiVerses(["Psalms", yizkor]);
       str6 += "</span></li>";
