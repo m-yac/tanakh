@@ -201,104 +201,175 @@ const ketuvim = [
                   ["II Chronicles", [18, 17, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 23, 14, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 26, 23]]]]
 ];
 
-const shabbatReadings = {
+const prayers = {
   "Ma Tovu":
-    [["Numbers",       [[[24,5]]]],
-     ["Psalms",        [[[5,8]],
-                        [[26,8]],
-                        [[95,6]],
-                        [[69,14]]]]],
+    [["",
+      [["Numbers",      [[[24,5]]]],
+       ["Psalms",       [[[5,8]],
+                         [[26,8]],
+                         [[95,6]],
+                         [[69,14]]]]]]],
   "Kabbalat Shabbat":
-    [["Psalms",       [[95, 99],
-                       [29],
-                       [92, 93]]]],
+    [["",
+      [["Psalms",       [[95, 99],
+                         [29],
+                         [92, 93]]]]]],
   "Shema":
-    [["Deuteronomy",  [[[6,4], [6,9]]]]],
-  "After the Shema":
-    [["Deuteronomy",  [[[11,13], [11,21]]]],
-     ["Numbers",      [[[15,37], [15,41]]]]],
+    [["Shema Yisrael",
+      [["Deuteronomy",  [[[6,4]]]]]],
+     ["V'ahavta",
+      [["Deuteronomy",  [[[6,5], [6,9]]]]]],
+     ["",
+      [["Deuteronomy",  [[[11,13], [11,21]]]]]],
+     ["",
+      [["Numbers",      [[[15,37], [15,41]]]]]]],
   "Veshamru":
-    [["Exodus",       [[[31,16], [31,17]]]]],
+    [["",
+      [["Exodus",       [[[31,16], [31,17]]]]]]],
   "Proclaiming the Festivals":
-    [["Leviticus",    [[[23,44]]]]],
+    [["",
+      [["Leviticus",    [[[23,44]]]]]]],
   "Vay'chulu":
-    [["Genesis",      [[[2,1], [2,3]]]]],
-  "Pesukei Dezimra (before Ashrei)":
-    [["Psalms",       [[30]]],
-     ["I Chronicles", [[[16,8], [16,36]]]],
-     ["Psalms",       [[[104,31]],
-                       [[113,2], [113,4]],
-                       [[135,13]],
-                       [[103,19]]]],
-     ["I Chronicles", [[[16,31]]]],
-     ["Psalms",       [[[10,16]],
-                       [[92,1]]]],
-     ["Exodus",       [[[15,18]]]],
-     ["Psalms",       [[[33,9], [33,11]]]],
-     ["Proverbs",     [[[19,21]]]],
-     ["Psalms",       [[[132,13]],
-                       [[135,4]],
-                       [[94,14]],
-                       [[78,38]],
-                       [[20,10]]]]],
-  "Pesukei Dezimra (additions for Shabbat)":
-    [["Psalms",       [[19], [34], [90], [91], [135], [136], [33], [92], [93]]]],
-  "Pesukei Dezimra (addition except on Shabbat)":
-    [["Psalms",       [[100]]]],
+    [["",
+      [["Genesis",      [[[2,1], [2,3]]]]]]],
+  // https://opensiddur.org/prayers/solilunar/everyday/daytime/psukei-dzimrah/yehi-khvod-interpretive-translation-by-zalman-schachter-shalomi/
+  "Yehi Kevod":
+    [["",
+      [["Psalms",       [[[104,31]],
+                         [[113,2], [113,4]],
+                         [[135,13]],
+                         [[103,19]]]],
+       ["I Chronicles", [[[16,31]]]],
+       ["Psalms",       [[[10,16]],
+                         [[92,1]]]],
+       ["Exodus",       [[[15,18]]]],
+       ["Psalms",       [[[33,9], [33,11]]]],
+       ["Proverbs",     [[[19,21]]]],
+       ["Psalms",       [[[132,13]],
+                         [[135,4]],
+                         [[94,14]],
+                         [[78,38]],
+                         [[20,10]]]]]]],
+  "Psalms for Pesukei Dezimra":
+    [["",
+      [["Psalms",        [[30]]]]],
+     ["On Shabbat and certain festivals",
+      [["Psalms",       [[19], [34], [90], [91], [135], [136], [33], [92], [93]]]]],
+     ["Not on Shabbat and certain festivals",
+      [["Psalms",        [[100]]]]]],
   "Ashrei":
-    [["Psalms",       [[[84,5]],
-                       [[144,15]],
-                       [145],
-                       [[115,18]]]]],
-  "Pesukei Dezimra (after Ashrei)":
-    [["Psalms",       [[146, 150]]],
-     ["I Chronicles", [[[29,10], [29,13]]]],
-     ["Nehemiah",     [[[9,6], [9,11]]]]],
+    [["",
+      [["Psalms",       [[[84,5]],
+                         [[144,15]],
+                         [145],
+                         [[115,18]]]]]]],
+  "Hallel of Pesukei Dezimra":
+    [["",
+      [["Psalms",       [[146, 150]]]]]],
+  "Verses for Pesukei Dezimra":
+    [["",
+      [["I Chronicles", [[[16,8], [16,36]]]]]],
+     ["",
+      [["Psalms",       [[[89,53]],
+                         [[135,21]],
+                         [[72,18], [72,19]]]]]],
+     ["",
+      [["I Chronicles", [[[29,10], [29,13]]]]]],
+     ["",
+      [["Nehemiah",     [[[9,6], [9,11]]]]]]],
   "Mi Chamocha":
-    [["Exodus",       [[[15,1], [15,18]]]]],
+    [["",
+      [["Exodus",       [[[15,1], [15,18]]]]]]],
   "Kedushah":
-    [["Isaiah",       [[[6,3]]]],
-     ["Ezekiel",      [[[3,12]]]],
-     ["Psalms",       [[[146,10]]]]],
+    [["",
+      [["Isaiah",       [[[6,3]]]]]],
+     ["",
+      [["Ezekiel",      [[[3,12]]]]]],
+     ["",
+      [["Psalms",       [[[146,10]]]]]]],
   "Returning the Torah to the Ark":
-    [["Proverbs", [[[3,17]]]]],
+    [["",
+      [["Proverbs",     [[[3,17]]]]]]],
+  // https://brill.com/view/book/edcoll/9789004420465/BP000016.xml
   "Returning the Torah to the Ark (additional verses)":
-    [["Numbers",      [[[10,36]]]],
-     ["Psalms",       [[[132,8], [132, 10]]]],
-     ["Proverbs",     [[[4,2]], [[3,18]]]],
-     ["Lamentations", [[[5,21]]]]],
+    [["",
+      [["Numbers",      [[[10,36]]]]]],
+     ["",
+      [["Psalms",       [[[132,8], [132, 10]]]]]],
+     ["",
+      [["Proverbs",     [[[4,2]], [[3,18]]]]]],
+     ["",
+      [["Lamentations", [[[5,21]]]]]]],
   "Putting on a Tallit":
-    [["Psalms",       [[[36,8], [36,11]]]]]
+    [["",
+      [["Psalms",       [[[36,8], [36,11]]]]]]],
+  // https://www.chabad.org/library/article_cdo/aid/4858924/jewish/Shofar-Blowing-Blessings-and-Instructions.htm
+  "Shofar service":
+    [["",
+      [["Psalms",       [[47]]]]],
+     ["",
+      [["Psalms",       [[[98,6]]]],
+       ["Numbers",      [[[29,1]]]],
+       ["Psalms",       [[[81,4], [81,5]]]]]],
+     ["",
+      [["Psalms",       [[[118,5]], [[119,149]], [[119,160]], [[119,122]],
+                         [[119,162]], [[119,66]], [[119,108]], [[47,6]]]]]],
+     ["",
+      [["Psalms",       [[[89,16], [89,18]]]]]]]
 };
 
+// Numbers 15:38 - Putting on a Tallit? (p. 143)
 // Numbers 6:24-26 - ? (p. 153)
 // Psalm 27 (or 130?) - Psalm for Rosh Chodesh Elul through Shemini Atzeret (penitential season?)
 // 121 122 - Pesukei dezimra?
 // Psalm 29 - Shabbat (p. 342)
 // Psalm 24 - festivals following a weekday (p. 344)
 
-const shabbats = {
-  "Shabbat or festival evening":
+// Rosh Hashana evening services
+// Psalms 81:4-5 - To Proclaim This Day (p. 33)
+// Psalm 27 - ? (p. 27)
+// Rosh Hashana morning services
+// Psalms 104:1-2 - Putting on a Tallit? (p. 81)
+// Psalm 27 - ? (p. 95)
+// Exodus 15:18; Numbers 23:21; Deut. 33:5; Psalms 22:29, 93:1, 24:7-10; Isaiah 44:6; Obadiah 1:21; Zechariah 14:9; Deut. 6:4 - Malchuyot (p. 272)
+// Genesis 8:1; Exodus 2:24; Lev. 26:42; Psalms 111:4-5, 106:45; Jeremiah 2:2; Ezekiel 16:60; Jeremiah 31:20 - Zochronot (p. 274)
+// Exodus 19:16, 19:19, 20:15; Psalms 47:6, 98:6, 81:4-5, 150; Isaiah 18:3, 27:13; Zechariah 9:14-15 - Shofarot (p. 275)
+// Kol Nidre
+// Psalms 81:4-5 - To Proclaim This Day (p. 421)
+// ? - (p. 449)
+// Exodus 34:6-7 - Thirteen Attributes (p. 455)
+
+// Still have to do: Tashlich, Avodah service
+
+const services = {
+  "Evening":
     ["Ma Tovu",
-     "Kabbalat Shabbat",
      "Shema",
-     "After the Shema",
-     "Veshamru",
+     "Veshamru"],
+  "Shabbat evening":
+    ["Kabbalat Shabbat",
      "Vay'chulu"],
-  "Shabbat or festival morning":
+  "Morning":
     ["Ma Tovu",
-     "Pesukei Dezimra (before Ashrei)",
-     "Pesukei Dezimra (additions for Shabbat)",
-     "Pesukei Dezimra (addition except on Shabbat)",
+     "Putting on a Tallit",
+     "Psalms for Pesukei Dezimra",
+     "Yehi Kevod",
      "Ashrei",
-     "Pesukei Dezimra (after Ashrei)",
+     "Hallel of Pesukei Dezimra",
+     "Verses for Pesukei Dezimra",
      "Mi Chamocha",
      "Shema",
-     "After the Shema",
      "Kedushah",
      "Returning the Torah to the Ark",
      "Returning the Torah to the Ark (additional verses)"],
+  "Rosh Hashana morning":
+    ["Shofar service"]
 };
+const importantPrayers = [
+  "Ma Tovu", "Ashrei", "Mi Chamocha", "Shema",
+  "Kedushah", "Returning the Torah to the Ark",
+  "Veshamru"
+];
 
 const shirShelYom = {
   "Sunday":    [[24]],
@@ -358,6 +429,18 @@ const hallelHolidays = {
   "Rosh Chodesh": false,
   "Shabbat Rosh Chodesh": false
 };
+const fullHallelHolidaysSummary = [
+  wikiLink("Shavout"),
+  wikiLink("Sukkot"),
+  wikiLink("Shmini Atzeret"),
+  wikiLink("Simchat Torah"),
+  wikiLink("Chanukah"),
+  "First two days of " + wikiLink("Pesach")
+];
+const partialHallelHolidaysSummary = [
+  wikiLink("Rosh Chodesh"),
+  "Last six days of " + wikiLink("Pesach")
+];
 
 const yizkor = [[23]];
 
@@ -457,11 +540,12 @@ function printHaftarotByBook() {
   }
 }
 
-function printShabbatReadings() {
-  for (const k in shabbatReadings) {
+function printPrayers() {
+  for (const k in prayers) {
     console.log(k + ":");
-    for (const [nm, vss] of shabbatReadings[k]) {
-      console.log(" - " + fmtNameAndMultiVerses([nm, vss]));
+    for (const [s, nmvss] of prayers[k]) {
+      const str = nmvss.map(fmtNameAndMultiVerses).join("; ");
+      console.log(" - " + (s === "" ? "" : s + ": ") + str);
     }
   }
 }
@@ -620,7 +704,7 @@ const holidayKeyMap = {
   // "Sukkot Chol ha-Moed Day 5": "Seventh day of " + wikiLink("Sukkot"),
   "Sukkot Shabbat Chol ha-Moed": wikiLink("Shabbat") + " of " + wikiLink("Sukkot"),
   "Sukkot Final Day (Hoshana Raba)": wikiLink("Hoshana Raba") + " (seventh day of " + wikiLink("Sukkot") + ")",
-  "Shmini Atzeret": wikiLink("Shmini Atzeret") + " (eighth day of " + wikiLink("Sukkot") + ")",
+  "Shmini Atzeret": wikiLink("Shmini Atzeret"),
   "Erev Simchat Torah": "Evening before " + simchatTorahLink,
   "Simchat Torah": simchatTorahLink ,
   "Shabbat Chanukah": "First " + wikiLink("Shabbat") + " of " + wikiLink("Chanukah"),
@@ -648,38 +732,54 @@ const holidayKeyMap = {
   "Shabbat Machar Chodesh": wikiLink("Shabbat") + " before " + roshChodeshLink
 };
 
-const shabbatKeyMap = {
-  "Shabbat or festival evening": wikiLink("Shabbat") + " or festival evening",
-  "Shabbat or festival morning": wikiLink("Shabbat") + " or festival morning",
-  "Ma Tovu": "<b>" + wikiLink("Ma Tovu") + "</b>",
-  "Shema": "<b>" + wikiLink("Shema") + "</b>",
-  "After the Shema": "After the " + wikiLink("Shema"),
-  "Veshamru": "<b><i>Veshamru</i></b>",
+const prayerKeyMap = {
+  "Evening": "Evening services",
+  "Shabbat evening": wikiLink("Shabbat") + " evening services",
+  "Festival evening": "Festival evening services",
+  "Morning": "Morning services",
+  "Shabbat morning": wikiLink("Shabbat") + " morning services",
+  "Festival morning": "Festival morning services",
+  "Rosh Hashana morning": wikiLink("Rosh Hashana") + " morning services",
+  "Additions for Evening": "Evening services",
+  "Additions for Shabbat evening": "↳ " + wikiLink("Shabbat") + " evening services",
+  "Additions for Morning": "Morning services",
+  "Additions for Festival evening": "↳ Festival evening services",
+  "Additions for Shabbat morning": "↳ " + wikiLink("Shabbat") + " morning services",
+  "Additions for Festival morning": "↳ Festival morning services",
+  "Additions for Rosh Hashana morning": "↳ " + wikiLink("Rosh Hashana") + " morning services",
+  "Ma Tovu": wikiLink("Ma Tovu"),
+  "Shema": wikiLink("Shema"),
+  "Veshamru": "<i>Veshamru</i>",
   "Proclaiming the Festivals": "Proclaiming the Festivals",
-  "Pesukei Dezimra (before Ashrei)": wikiLink("Pesukei Dezimra") + " (before " + wikiLink("Ashrei") + ")",
-  "Ashrei": "<b>" + wikiLink("Ashrei") + "</b>",
-  "Pesukei Dezimra (additions for Shabbat)":  wikiLink("Pesukei Dezimra") + " (additions for " + wikiLink("Shabbat") + " and festivals)",
-  "Pesukei Dezimra (addition except on Shabbat)":  wikiLink("Pesukei Dezimra") + " (addition except on " + wikiLink("Shabbat") + " and certain festivals)",
-  "Pesukei Dezimra (after Ashrei)": wikiLink("Pesukei Dezimra") + " (after " + wikiLink("Ashrei") + ")",
-  "Mi Chamocha": "<b>" + wikiLink("Mi Chamocha", "Song of the Sea") + "</b>",
-  "Kedushah": "<b>" + wikiLink("Kedushah", undefined, "Kedushah_(prayer)#Kedushah_in_the_Amidah") + "</b>",
-  "Returning the Torah to the Ark": "<b>Returning the <i>Torah</i> to the " + arkLink + "</b>",
-  "Returning the Torah to the Ark (additional verses)": "Returning the <i>Torah</i> to the " + arkLink + " (additional verses)"
+  "Psalms for Pesukei Dezimra": "Psalms of " + wikiLink("Pesukei Dezimra"),
+  "On Shabbat and certain festivals": "On " + wikiLink("Shabbat") + " and certain festivals",
+  "Not on Shabbat and certain festivals": "Not on " + wikiLink("Shabbat") + " and certain festivals",
+  "Yehi Kevod": wikiLink("Yehi Kevod") + " (part of " + wikiLink("Pesukei Dezimra") + ")",
+  "Ashrei": wikiLink("Ashrei"),
+  "Hallel of Pesukei Dezimra": wikiLink("<i>Hallel</i> of <i>Pesukei Dezimra</i>", undefined, "Hallel_(pesukei_dezimra)", true) + " (after " + wikiLink("Ashrei") + ")",
+  "Verses for Pesukei Dezimra": "Verses in " + wikiLink("Pesukei Dezimra"),
+  "Mi Chamocha": wikiLink("Mi Chamocha", "Song of the Sea"),
+  "Kedushah": wikiLink("Kedushah", undefined, "Kedushah_(prayer)#Kedushah_in_the_Amidah"),
+  "Returning the Torah to the Ark": "Returning the <i>Torah</i> to the " + arkLink,
+  "Returning the Torah to the Ark (additional verses)": "Returning the <i>Torah</i> to the " + arkLink + " (additional verses)",
+  "Shema Yisrael": "<i>Shema Yisrael</i>",
+  "V'ahavta": "<i>V'ahavta</i>",
+  "Putting on a Tallit": "Putting on a " + wikiLink("Tallit")
 };
 
 const portions_flat = [].concat.apply([], portions);
 var descOfPortion_cache = {};
-function descOfPortion(nm, k, rds, hideAst) {
+function descOfPortion(nm, k, rds, hideAst, hideReadOn) {
   if (rds == undefined) { rds = []; }
   if (descOfPortion_cache[[nm,k]] != undefined) {
-    return [descOfPortion_cache[[nm,k]][0](rds), descOfPortion_cache[[nm,k]][1]];
+    return [descOfPortion_cache[[nm,k]][0](rds, hideAst, hideReadOn), descOfPortion_cache[[nm,k]][1]];
   }
   const h = ' class="highlighted"';
   if (nm == "A") {
     const {summary, haftara} = hebcal__leyning.getLeyningForParsha(k);
     const {num} = hebcal__leyning__aliyot[k];
-    let str1 = "<b><i>Shabbat</i> week " + num;
-    if (!hideAst && portions_flat[num-1][4]) { str1 += "*"; }
+    let str0 = "<b><i>Shabbat</i> week " + num;
+    let str1 = "";
     if (portionDates[k]) { str1 += " (" + portionDates[k].toLocaleDateString() + ")"; }
     str1 += ": <i>Parashat " + k + "</i> ";
     str1 += "(" + portions_flat[num-1][2] + ")</b>";
@@ -689,15 +789,16 @@ function descOfPortion(nm, k, rds, hideAst) {
     str2 += "<li><span";
     let str3 = ">" + wikiLink("Haftarah") + ": " + haftara + "</span></li>";
     str3 += "</ul>";
-    const fn = function (rdsi) {
+    const fn = function (rdsi, hideAsti, hideReadOni) {
       // for now, we ignore highligting here
       rdsi = [];
-      return str1 + (rdsi.includes("torah") ? h : "") +
+      return str0 + (!hideAsti && portions_flat[num-1][4] ? "*" : "") +
+             str1 + (rdsi.includes("torah") ? h : "") +
              str2 + (rdsi.includes("haft") ? h : "") +
              str3;
     };
     descOfPortion_cache[[nm,k]] = [fn, portions_flat[num-1][4]];
-    return [fn(rds), portions_flat[num-1][4]];
+    return [fn(rds, hideAst, hideReadOn), portions_flat[num-1][4]];
   }
   if (nm == "H") {
     const {summary, haftara} = hebcal__leyning.getLeyningForHolidayKey(k);
@@ -749,7 +850,7 @@ function descOfPortion(nm, k, rds, hideAst) {
       str6 += "</span></li>";
     }
     str6 += "</ul>";
-    const fn = function (rdsi) {
+    const fn = function (rdsi, hideAsti, hideReadOni) {
       // for now, we ignore highligting here
       rdsi = [];
       return str1 + (rdsi.includes("torah") ? h : "") +
@@ -760,22 +861,65 @@ function descOfPortion(nm, k, rds, hideAst) {
              str6;
     };
     descOfPortion_cache[[nm,k]] = [fn, undefined];
-    return [fn(rds), undefined];
+    return [fn(rds, hideAst, hideReadOn), undefined];
   }
-  if (nm == "S") {
-    const k_fmt = shabbatKeyMap[k];
-    let str = "<b>" + (k_fmt ? k_fmt : k) + " services</b><ul>";
-    for (const k1 of shabbats[k]) {
-      const k1_fmt = shabbatKeyMap[k1];
-      str += "<li><span";
-      if (rds.includes(k1)) { str += h; }
-      str += ">" + (k1_fmt ? k1_fmt : "<i>" + k1 + "</i>") + ": ";
-      str += shabbatReadings[k1].map(fmtNameAndMultiVerses).join("; ");
-      str += "</span></li>"
+  if (nm == "P") {
+    const k_fmt = prayerKeyMap[k];
+    let str1 = (k_fmt ? k_fmt : "<i>" + k + "</i>");
+    let str2 = "<ul>";
+    for (const [nm, rds] of prayers[k]) {
+      str2 += "<li>";
+      if (nm !== "") {
+        const nm_fmt = prayerKeyMap[nm];
+        str2 += (nm_fmt ? nm_fmt : nm) + ": ";
+      }
+      str2 += rds.map(fmtNameAndMultiVerses).join("; ");
+      str2 += "</li>";
     }
-    str += "</ul>"
-    // descOfPortion_cache[[nm,k]] = [str, undefined];
-    return [str, undefined];
+    let str3 = "";
+    const readOn = Object.keys(services).filter((k1) => services[k1].includes(k))
+                                        .map(function (k1) {
+                                          const k1_fmt = prayerKeyMap[k1];
+                                          return k1_fmt ? k1_fmt : k1;
+                                        });
+    if (readOn.length > 0) {
+      str3 += "<li>(Read on: " + readOn.join(", ") + ")</li>";
+    }
+    let str4 = "</ul>";
+    const imp = importantPrayers.includes(k);
+    const fn = function (rdsi, hideAstsi, hideReadOni) {
+      return        (!hideReadOni || imp ? "<b>" : "") +
+             str1 + (!hideReadOni || imp ? "</b>" : "") +
+             str2 + (!hideReadOni ? str3 : "") +
+             str4;
+    };
+    descOfPortion_cache[[nm,k]] = [fn, undefined];
+    return [fn(rds, hideAst, hideReadOn), undefined]
+  }
+  if (nm == "SH") {
+    let str = "<b>";
+    if (k == "Full hallel") {
+      str += "Full " + wikiLink("Hallel") + "</b><ul>";
+      str += "<li>" + fmtNameAndMultiVerses(["Psalms", fullHallel]) + "</li>";
+      str += "<li>(Read on: " + fullHallelHolidaysSummary.join(", ") + ")</li>";
+    }
+    if (k == "Partial hallel") {
+      str += "Partial " + wikiLink("Hallel") + "</b><ul>";
+      str += "<li>" + fmtNameAndMultiVerses(["Psalms", partialHallel]) + "</li>";
+      str += "<li>(Read on: " + partialHallelHolidaysSummary.join(", ") + ")</li>";
+    }
+    if (k == "Yizkor") {
+      str += wikiLink("Yizkor") + " service</b><ul>";
+      str += "<li>" + fmtNameAndMultiVerses(["Psalms", yizkor]) + "</li>";
+      const readOn = Object.keys(yizkorHolidays).map(function (k1) {
+        const k1_fmt = holidayKeyMap[k1];
+        return k1_fmt ? k1_fmt.replace(/ \([^\)]*\)<\/a>/, "</a>") : k1;
+      });
+      str += "<li>(Read on: " + readOn.join(", ") + ")</li>";
+    }
+    str += "</ul>";
+    descOfPortion_cache[[nm,k]] = [(() => str), undefined];
+    return [str, undefined]
   }
   if (nm == "Y") {
     let str = "<b>" + k + " " + wikiLink("Shir Shel Yom", "Song of the Day") + "</b><ul>";
@@ -801,8 +945,68 @@ function saniID(s) {
 // JQuery
 // ================================================================
 
+function mousemoveCh(marker, byCh, nm, c, e) {
+  if (!clickState) {
+    const l = e.currentTarget.getBoundingClientRect().left + window.scrollX;
+    const t = e.currentTarget.getBoundingClientRect().top  + window.scrollY;
+    const h = e.currentTarget.getBoundingClientRect().height;
+    const v = Math.max(Math.ceil(e.clientX - l), 1);
+    marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
+    $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
+    const rds = byCh.filter((x,i) => x[3][0] <= v && v <= x[3][1])
+                    .map(x => [x[0], x[1], [x[2]], x[3]]);
+    const [readOn, partOf] = rds.filter(function (x,i) {
+      const i_fst = rds.findIndex(y => x[1] == y[1]);
+      if (i_fst == i) { return true; }
+      rds[i_fst][2] = rds[i_fst][2].concat(x[2]);
+    }).reduce(function (accs,x) {
+      accs[["P","Y","SH"].includes(x[0]) ? 1 : 0].push(x);
+      return accs;
+    }, [[],[]]);
+    const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + nm.replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
+                        .text(nm + " " + (c+1) + ":" + v)
+                        .attr("target", "blank");
+    const text1 = readOn.length > 0 ? ", read on:" :
+                  partOf.length > 0 ? ", part of:" : "";
+    const text2 = readOn.length > 0 && partOf.length > 0 ? "and part of:" : "";
+    $('#verseText').html("<b>" + lnk.prop("outerHTML") + "</b>" + text1);
+    $('#readingsText').empty();
+    let asts = undefined;
+    readOn.forEach(function (x) {
+      const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
+      if (ast) { asts = ast; }
+      $('#readingsText').append($('<li>').html(desc))
+    });
+    $('#addlText').html(text2);
+    $('#addlText').css("margin-top", text2 !== "" ? "5px" : "0");
+    $('#prayersText').empty();
+    partOf.forEach(function (x) {
+      $('#prayersText').append($('<li>').html(descOfPortion(x[0], x[1], x[2])[0]))
+    })
+    $('#astText').html(asts ? "* " + asts : "");
+    $('#astText').css("margin-top", asts ? "5px" : "0");
+    if (readOn.length == 0 || readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
+      if (lastTorahPortion !== "") {
+        for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
+          $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
+        }
+      }
+      lastTorahPortion = "";
+    }
+    if (readOn.length > 0 && readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
+      for (let i = 0; i < torahPortionChs[readOn[0][1]]; i++) {
+        $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("visHighlighted");
+      }
+      lastTorahPortion = readOn[0][1];
+    }
+    const max_left = $(window).width()-$('#mouseoverBox').width();
+    $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
+  }
+}
+
 var [clickState, justSetClickState] = ["", false];
 var lastTorahPortion = "";
+var torahPortionChs = {};
 var portionDates = {};
 
 $(document).ready(function() {
@@ -876,7 +1080,7 @@ $(document).ready(function() {
     if (e.parsha && !nextParshas) { nextParshas = e.parsha; }
     const k = hebcal__leyning.getLeyningKeyForEvent(e);
     if (k && !nextHoliday) { nextHoliday = k; }
-    if (!nextParshas && !nextHoliday) { break; }
+    // if (!nextParshas && !nextHoliday) { break; }
   }
   // $('#nextShabbatPortionPlural').text(nextParshas.length == 1 ? "portion" : "portions");
   $('#nextShabbatPortion').html("<li>" + nextParshas.map(p => descOfPortion("A", p, [], nextParshas.length == 1)[0]).join("</li><li>") + "</li>");
@@ -912,6 +1116,7 @@ $(document).ready(function() {
     if (dates.every(d1 => d1.getTime() != d.getTime())) { dates.push(d); }
   }
   dates.sort((a,b) => a - b);
+  var [eventID, dateGroups] = [0, [[],[],[],[],[]]];
   $('#dateSelect').append($('<option>').html("—"));
   for (const d of dates) {
     const d_str = d.toLocaleDateString();
@@ -921,7 +1126,42 @@ $(document).ready(function() {
       return [nm, k];
     });
     datePortions[d_str].sort((a,b) => b[0] < a[0] ? 1 : a[0] < b[0] ? -1 : 0);
+    const diff = d.getTime() - today.getTime();
+    const ix = [7,28,84,168,385].findIndex((ds) => diff <= ds * 60 * 60 * 24 * 1000);
+    if (ix > -1) {
+      const hideAsts = datePortions[d_str].filter(([nm,_]) => nm == "A").length <= 1;
+      for (const [nm, k] of datePortions[d_str]) {
+        const [desc, ast] = descOfPortion(nm, k, [], hideAsts);
+        let item = $('<li>').attr("id", "event" + eventID);
+        if (ix > 0) { item.addClass("hidden") };
+        item.html(desc + (!hideAsts && ast ? "* " + ast : ""));
+        $('#upcomingEvents').append(item);
+        dateGroups[ix].push(eventID);
+        eventID++;
+      }
+    }
   }
+  var currShowMoreIx = 0;
+  $('#moreUpcomingEvents').click(function () {
+    if (currShowMoreIx < dateGroups.length-1) {
+      currShowMoreIx++;
+      for (const id of dateGroups[currShowMoreIx]) {
+        $('#event' + id).removeClass("hidden");
+      }
+      if (currShowMoreIx == dateGroups.length-1) {
+        $('#moreUpcomingEvents').text("show less");
+      }
+    }
+    else {
+      currShowMoreIx = 0;
+      for (let ix = 1; ix <= dateGroups.length-1; ix++) {
+        for (const id of dateGroups[ix]) {
+          $('#event' + id).addClass("hidden");
+        }
+      }
+      $('#moreUpcomingEvents').text("show more");
+    }
+  });
   $('#dateSelect').change(function () {
     $('#portionForDate').empty();
     if ($('#dateSelect').val() != "—") {
@@ -943,6 +1183,39 @@ $(document).ready(function() {
       }
     }
   });
+
+  var serviceID = 0;
+  for (const k in services) {
+    const k0 = "Additions for " + k;
+    const k0_fmt = prayerKeyMap[k0];
+    let str = "<li><b>" + (k0_fmt ? k0_fmt : k0 + " services") + "</b>";
+    str += '<span id="serviceExpand' + serviceID + '" style="float:right">';
+    str += $('<i>').html($('<a>').attr("href", "javascript:void(0)")
+                                 .attr("id", "serviceExpandText" + serviceID)
+                                 .html("expand"))
+                   .prop("outerHTML");
+    str += "</span>";
+    str += '<ul id="serviceBody' + serviceID + '" class="hidden">';
+    for (const k1 of services[k]) {
+      const k1_fmt = prayerKeyMap[k1];
+      str += "<li>" + descOfPortion("P", k1, [], false, true)[0] + "</li>";
+    }
+    str += "</ul></li>";
+    $('#prayersByService').append(str);
+    const id = serviceID;
+    $('#serviceExpand' + serviceID).click(function () {
+      console.log("yo" + id, '#serviceBody' + id);
+      if ($('#serviceBody' + id).hasClass("hidden")) {
+        $('#serviceExpandText' + id).html("hide");
+        $('#serviceBody' + id).removeClass("hidden");
+      }
+      else {
+        $('#serviceExpandText' + id).html("expand");
+        $('#serviceBody' + id).addClass("hidden");
+      }
+    });
+    serviceID++;
+  }
 
 
   let [torahIx, torahByCh] = [{}, []];
@@ -969,7 +1242,6 @@ $(document).ready(function() {
     }
   }
 
-  var torahPortionChs = {};
   for (const k0 in hebcal__leyning__aliyot) {
     if (k0.includes("-")) {
       const [l,r] = k0.split("-");
@@ -1031,41 +1303,52 @@ $(document).ready(function() {
     }
   }
 
-  for (const k0 in hallelHolidays) {
-    const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
-    if (hallelHolidays[k0]) {
-      addPortionToCh(arr, vs_arr, expandVerses(fullHallel[0], vs_arr), "H", k0, "hallel");
-    }
-    else {
-      for (const vs of partialHallel) {
-        addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "H", k0, "hallel");
-      }
-    }
-  }
+  addPortionToCh(ketuvimByCh[0][0], ketuvim[0][1][0][1],
+                 expandVerses(fullHallel[0], ketuvim[0][1][0][1]),
+                 "SH", "Full hallel");
+  addPortionToCh(ketuvimByCh[0][0], ketuvim[0][1][0][1],
+                 expandVerses(partialHallel[0], ketuvim[0][1][0][1]),
+                 "SH", "Partial hallel");
+  // for (const k0 in hallelHolidays) {
+  //   const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
+  //   if (hallelHolidays[k0]) {
+  //     addPortionToCh(arr, vs_arr, expandVerses(fullHallel[0], vs_arr), "H", k0, "hallel");
+  //   }
+  //   else {
+  //     for (const vs of partialHallel) {
+  //       addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "H", k0, "hallel");
+  //     }
+  //   }
+  // }
 
-  for (const k0 in yizkorHolidays) {
-    const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
-    addPortionToCh(arr, vs_arr, expandVerses(yizkor[0], vs_arr), "H", k0, "yizkor");
-  }
+  addPortionToCh(ketuvimByCh[0][0], ketuvim[0][1][0][1],
+                 expandVerses(yizkor[0], ketuvim[0][1][0][1]),
+                 "SH", "Yizkor");
+  // for (const k0 in yizkorHolidays) {
+  //   const [arr, vs_arr] = [ketuvimByCh[0][0], ketuvim[0][1][0][1]];
+  //   addPortionToCh(arr, vs_arr, expandVerses(yizkor[0], vs_arr), "H", k0, "yizkor");
+  // }
 
-  for (const k0 in shabbats) {
-    for (const k1 of shabbats[k0]) {
-      for (const [k, vss] of shabbatReadings[k1]) {
-        let [arr, vs_arr] = [undefined, undefined];
-        if (k in torahIx) {
-          const book = torahIx[k];
-          [arr, vs_arr] = [torahByCh[book-1], torah[book-1][4]]
-        }
-        if (k in neviimIx) {
-          const [book, sb] = neviimIx[k];
-          [arr, vs_arr] = [neviimByCh[book-1][sb], neviim[book-1][1][sb][1]];
-        }
-        if (k in ketuvimIx) {
-          const [book, sb] = ketuvimIx[k];
-          [arr, vs_arr] = [ketuvimByCh[book-1][sb], ketuvim[book-1][1][sb][1]];
-        }
-        for (const vs of vss) {
-          addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "S", k0, k1);
+  for (const k0 in services) {
+    for (const k1 of services[k0]) {
+      for (const [nm, rds] of prayers[k1]) {
+        for (const [k, vss] of rds) {
+          let [arr, vs_arr] = [undefined, undefined];
+          if (k in torahIx) {
+            const book = torahIx[k];
+            [arr, vs_arr] = [torahByCh[book-1], torah[book-1][4]]
+          }
+          if (k in neviimIx) {
+            const [book, sb] = neviimIx[k];
+            [arr, vs_arr] = [neviimByCh[book-1][sb], neviim[book-1][1][sb][1]];
+          }
+          if (k in ketuvimIx) {
+            const [book, sb] = ketuvimIx[k];
+            [arr, vs_arr] = [ketuvimByCh[book-1][sb], ketuvim[book-1][1][sb][1]];
+          }
+          for (const vs of vss) {
+            addPortionToCh(arr, vs_arr, expandVerses(vs, vs_arr), "P", k1, k1);
+          }
         }
       }
     }
@@ -1114,52 +1397,7 @@ $(document).ready(function() {
       const vs = torah[b][4][c];
       const cb = $('<div>').addClass("chapterBox");
       cb.css("width", vs + "px");
-      cb.mousemove(function (e) {
-        if (!clickState) {
-          const l = e.currentTarget.getBoundingClientRect().left + window.scrollX;
-          const t = e.currentTarget.getBoundingClientRect().top  + window.scrollY;
-          const h = e.currentTarget.getBoundingClientRect().height;
-          const v = Math.max(Math.ceil(e.clientX - l), 1);
-          marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
-          $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
-          let readOn = torahByCh[b][c].filter((x,i) => x[3][0] <= v && v <= x[3][1])
-                                      .map(x => [x[0], x[1], [x[2]], x[3]]);
-          readOn = readOn.filter(function (x,i) {
-            const i_fst = readOn.findIndex(y => x[1] == y[1]);
-            if (i_fst == i) { return true; }
-            readOn[i_fst][2] = readOn[i_fst][2].concat(x[2]);
-          });
-          const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + torah[b][2] + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
-                              .text(torah[b][2] + " " + (c+1) + ":" + v)
-                              .attr("target", "blank");
-          $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
-          $('#readingsText').empty();
-          let asts = undefined;
-          readOn.forEach(function (x) {
-            const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
-            if (ast) { asts = ast; }
-            $('#readingsText').append($('<li>').html(desc))
-          });
-          $('#astText').html(asts ? "* " + asts : "");
-          $('#astText').css("margin-top", asts ? "5px" : "0");
-          if (readOn.length == 0 || readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
-            if (lastTorahPortion !== "") {
-              for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-                $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
-              }
-            }
-            lastTorahPortion = "";
-          }
-          if (readOn.length > 0 && readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
-            for (let i = 0; i < torahPortionChs[readOn[0][1]]; i++) {
-              $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("visHighlighted");
-            }
-            lastTorahPortion = readOn[0][1];
-          }
-          const max_left = $(window).width()-$('#mouseoverBox').width();
-          $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
-        }
-      });
+      cb.mousemove((e) => mousemoveCh(marker, torahByCh[b][c], torah[b][2], c, e));
       for (let i = 0; i < torahByCh[b][c].length; i++) {
         const [kind, nm, rd, [v1, v2]] = torahByCh[b][c][i];
         const isBelow = i > 0 && torahByCh[b][c].some(function ([kind1,_1,_2,[v3,v4]],j) {
@@ -1167,9 +1405,9 @@ $(document).ready(function() {
           return i != j && v1 <= v4 && v3 <= v2;
         });
         const [top, height] = isBelow ? [6,6] : [0,12];
-        const clr = kind == "A" ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53) :
-                    kind == "H" ? portionColor(4/3)
-                                : portionColor(7/6);
+        const clr = kind == "A"        ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53) :
+                    kind.includes("H") ? portionColor(4/3)
+                                       : portionColor(7/6);
         const bx = $('<div>').addClass("versesBox");
         bx.css("position", "absolute");
         let [left, width] = [v1-1, v2 - v1 + 1];
@@ -1235,52 +1473,7 @@ $(document).ready(function() {
         const vs = neviim[b][1][sb][1][c];
         const cb = $('<div>').addClass("chapterBox");
         cb.css("width", vs + "px");
-        cb.mousemove(function (e) {
-          if (!clickState) {
-            const l = e.currentTarget.getBoundingClientRect().left + window.scrollX;
-            const t = e.currentTarget.getBoundingClientRect().top  + window.scrollY;
-            const h = e.currentTarget.getBoundingClientRect().height;
-            const v = Math.max(Math.ceil(e.clientX - l), 1);
-            marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
-            $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
-            let readOn = neviimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1])
-                                        .map(x => [x[0], x[1], [x[2]], x[3]]);
-            readOn = readOn.filter(function (x,i) {
-              const i_fst = readOn.findIndex(y => x[1] == y[1]);
-              if (i_fst == i) { return true; }
-              readOn[i_fst][2] = readOn[i_fst][2].concat(x[2]);
-            });
-            const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + neviim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
-                                .text(neviim[b][1][sb][0] + " " + (c+1) + ":" + v)
-                                .attr("target", "blank");
-            $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
-            $('#readingsText').empty();
-            let asts = undefined;
-            readOn.forEach(function (x) {
-              const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
-              if (ast) { asts = ast; }
-              $('#readingsText').append($('<li>').html(desc))
-            });
-            $('#astText').html(asts ? "* " + asts : "");
-            $('#astText').css("margin-top", asts ? "5px" : "0");
-            if (readOn.length == 0 || readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
-              if (lastTorahPortion !== "") {
-                for (let i = 0; i < torahPortionChs[lastTorahPortion]; i++) {
-                  $('#' + "torahPortionCh" + saniID(lastTorahPortion) + i).removeClass("visHighlighted");
-                }
-              }
-              lastTorahPortion = "";
-            }
-            if (readOn.length > 0 && readOn[0][0] == "A" && lastTorahPortion !== readOn[0][1]) {
-              for (let i = 0; i < torahPortionChs[readOn[0][1]]; i++) {
-                $('#' + "torahPortionCh" + saniID(readOn[0][1]) + i).addClass("visHighlighted");
-              }
-              lastTorahPortion = readOn[0][1];
-            }
-            const max_left = $(window).width()-$('#mouseoverBox').width();
-            $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
-          }
-        });
+        cb.mousemove((e) => mousemoveCh(marker, neviimByCh[b][sb][c], neviim[b][1][sb][0], c, e));
         for (let i = 0; i < neviimByCh[b][sb][c].length; i++) {
           const [kind, nm, rd, [v1, v2]] = neviimByCh[b][sb][c][i];
           const isBelow = i > 0 && neviimByCh[b][sb][c].some(function ([kind1,_1,_2,[v3,v4]],j) {
@@ -1288,9 +1481,9 @@ $(document).ready(function() {
             return i != j && v1 <= v4 && v3 <= v2;
           });
           const [top, height] = isBelow ? [6,6] : [0,12];
-          const clr = kind == "A" ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53) :
-                      kind == "H" ? portionColor(4/3)
-                                  : portionColor(7/6);
+          const clr = kind == "A"        ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53) :
+                      kind.includes("H") ? portionColor(4/3)
+                                         : portionColor(7/6);
           const bx = $('<div>').addClass("versesBox");
           bx.css("position", "absolute");
           let [left, width] = [v1-1, v2 - v1 + 1];
@@ -1350,49 +1543,18 @@ $(document).ready(function() {
       for (let c = 0; c < ketuvim[b][1][sb][1].length; c++) {
         const cb = $('<div>').addClass("chapterBox");
         cb.css("width", Math.ceil(ketuvim[b][1][sb][1][c]) + "px");
-        cb.mousemove(function (e) {
-          if (!clickState) {
-            const l = e.currentTarget.getBoundingClientRect().left + window.scrollX;
-            const t = e.currentTarget.getBoundingClientRect().top  + window.scrollY;
-            const h = e.currentTarget.getBoundingClientRect().height;
-            const v = Math.max(Math.ceil(e.clientX - l), 1);
-            marker.removeClass("hidden").css("left", e.clientX).css("top", t + h - 13);
-            $('#mouseoverBox').removeClass("hidden").css("left", 0).css("top", t + h + 5);
-            let readOn = ketuvimByCh[b][sb][c].filter(x => x[3][0] <= v && v <= x[3][1])
-                                        .map(x => [x[0], x[1], [x[2]], x[3]]);
-            readOn = readOn.filter(function (x,i) {
-              const i_fst = readOn.findIndex(y => x[1] == y[1]);
-              if (i_fst == i) { return true; }
-              readOn[i_fst][2] = readOn[i_fst][2].concat(x[2]);
-            });
-            const lnk = $('<a>').attr("href", "https://www.sefaria.org/" + ketuvim[b][1][sb][0].replace(" ", "_") + "." + (c+1) + "." + v + "?lang=bi&with=all&lang2=en")
-                                .text(ketuvim[b][1][sb][0] + " " + (c+1) + ":" + v)
-                                .attr("target", "blank");
-            $('#verseText').html("<b>" + lnk.prop("outerHTML") + (readOn.length > 0 ? "</b>, read on: " : "</b>"));
-            $('#readingsText').empty();
-            let asts = undefined;
-            readOn.forEach(function (x) {
-              const [desc, ast] = descOfPortion(x[0], x[1], x[2]);
-              if (ast) { asts = ast; }
-              $('#readingsText').append($('<li>').html(desc))
-            });
-            $('#astText').html(asts ? "* " + asts : "");
-            $('#astText').css("margin-top", asts ? "5px" : "0");
-            const max_left = $(window).width()-$('#mouseoverBox').width();
-            $('#mouseoverBox').css("left", Math.min(e.clientX, max_left));
-          }
-        });
+        cb.mousemove((e) => mousemoveCh(marker, ketuvimByCh[b][sb][c], ketuvim[b][1][sb][0], c, e));
         for (let i = 0; i < ketuvimByCh[b][sb][c].length; i++) {
           const [kind, nm, rd, [v1, v2]] = ketuvimByCh[b][sb][c][i];
           const isBelow = i > 0 && ketuvimByCh[b][sb][c].some(function ([kind1,_1,_2,[v3,v4]],j) {
             if (kind === "A" && kind1 !== "A") { return false; }
-            if (["S","Y"].includes(kind) && ["S","Y"].includes(kind1)) { return false; }
+            if (["P","SH","Y"].includes(kind) && ["P","SH","Y"].includes(kind1)) { return false; }
             return i != j && v1 <= v4 && v3 <= v2;
           });
           const [top, height] = isBelow ? [6,6] : [0,12];
-          const clr = kind == "A" ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53) :
-                      kind == "H" ? portionColor(4/3)
-                                  : portionColor(7/6);
+          const clr = kind == "A"        ? portionColor((hebcal__leyning__aliyot[nm].num-1)/53) :
+                      kind.includes("H") ? portionColor(4/3)
+                                         : portionColor(7/6);
           const bx = $('<div>').addClass("versesBox");
           bx.css("position", "absolute");
           let [left, width] = [v1-1, v2 - v1 + 1];
